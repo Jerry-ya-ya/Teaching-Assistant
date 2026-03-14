@@ -18,6 +18,8 @@
 
 - Added chapter: index.
 
-- Added chapter: 1st lecture notes.
+- Added chapter: 1st lecture notes, first time of git init and push.
 
-- Added chapter: 2nd lecture notes.
+- Added chapter: 2nd lecture notes, using git to countinue the development of app.
+
+- Added chapter: 3rd lecture notes, using docker to build up flask app.
