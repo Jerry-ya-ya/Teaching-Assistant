@@ -23,3 +23,5 @@
 - Added chapter: 2nd lecture notes, using git to countinue the development of app.
 
 - Added chapter: 3rd lecture notes, using docker to build up flask app.
+
+- Update chapter: complete the content of the 2nd lecture.
