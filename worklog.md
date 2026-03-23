@@ -22,6 +22,8 @@
 
 - Added chapter: 2nd lecture notes, using git to countinue the development of app.
 
-- Added chapter: 3rd lecture notes, using docker to build up flask app.
+- Added chapter: 3rd lecture notes, using Docker to build up Flask app.
 
 - Update chapter: complete the content of the 2nd lecture.
+
+- Added chapter: 4th lecture notes, using Render to deploy container.
