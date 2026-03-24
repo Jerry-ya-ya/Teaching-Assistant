@@ -27,3 +27,5 @@
 - Update chapter: complete the content of the 2nd lecture.
 
 - Added chapter: 4th lecture notes, using Render to deploy container.
+
+- Improved the lack parts of 4th chapter.
