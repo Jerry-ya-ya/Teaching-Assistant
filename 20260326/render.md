@@ -56,6 +56,14 @@ python -m venv venv
 
 建立好虛擬環境後我們要將其啟動
 
+啟動前請注意觀察一下 venv/ 裡面的結構
+
+如果裡面是 venv\Scripts 就用下面這個 Windows 的指令
+
+若否則用 Mac / Linux 的指令(Codespace裡面用這個)
+
+venv 會根據你的系統而有所不同
+
 Windows（PowerShell）
 
 ```bash

@@ -33,3 +33,5 @@
 - Improved the lack parts of 4th chapter.
 
 - Compiled the semester’s teaching syllabus and created the related course files.
+
+- Added chapter: 5th lecture notes, using render_template and making multiple routes.

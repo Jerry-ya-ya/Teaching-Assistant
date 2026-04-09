@@ -538,4 +538,67 @@ http://localhost:5000
 Hello, Docker Flask!
 ```
 
+如果不想那麼麻煩每次打一堆字才能容器啟動
+
+我們就需要把 Docker 對外對內的設定都預先寫好
+
+建立一個叫做 docker-compose.yml 的檔案
+
+裡面我們放上需要的設定
+
+```bash
+services:
+  flask-mvp:
+    build: .
+    container_name: flask-mvp
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+```
+
+這邊最重要的是 port 設定
+
+左邊是對外連線的埠
+
+也就是我們在現在這台電腦上如果要看到東西就要用左邊的進行連線
+
+右邊則是容器內部的埠
+
+未來如果有多個容器需要連線我們就要使用內部的埠把它們串起來
+
+補充
+
+查看全部容器（包含已停止）
+
+```bash
+docker ps -a
+```
+
+暫停 / 停止容器
+
+```bash
+docker stop <container_name 或 container_id>
+```
+
+刪除單一容器
+
+```bash
+docker rm <container_name>
+```
+
+強制刪除（如果還在跑）
+
+```bash
+docker rm -f <container_name>
+```
+
+一鍵刪除所有容器
+
+```bash
+docker rm -f $(docker ps -aq)
+```
+
 [回到Readme](/Readme.md)
