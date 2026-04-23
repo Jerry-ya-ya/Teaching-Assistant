@@ -35,3 +35,5 @@
 - Compiled the semester’s teaching syllabus and created the related course files.
 
 - Added chapter: 5th lecture notes, using render_template and making multiple routes.
+
+- Update chapter: add content of the 5th lecture.
