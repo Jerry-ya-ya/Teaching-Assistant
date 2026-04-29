@@ -1,5 +1,57 @@
 [回到Readme](/Readme.md)
 
+```mermaid
+flowchart LR
+
+subgraph SETUP["環境準備"]
+    A[下載 Docker]
+    B[檢查 CPU 虛擬化]
+    C[安裝 WSL2]
+    D[設定 WSL2]
+    E[安裝 Docker Desktop]
+    F[啟動 Docker]
+    G[docker --version]
+    H[docker compose version]
+    I[docker ps]
+end
+
+subgraph PROJECT["專案準備"]
+    J[建立專案資料夾]
+    K[Git init & push]
+    L[建立 app.py]
+    M[建立 requirements.txt]
+    N[建立 Dockerfile]
+end
+
+subgraph BUILD["建構 Image"]
+    O[docker build]
+    P[docker images]
+end
+
+subgraph RUN["啟動容器"]
+    Q[docker run]
+    R[檢查容器運行]
+    S[localhost:5000]
+end
+
+subgraph COMPOSE["進階管理"]
+    T[建立 docker-compose.yml]
+    U[docker compose up]
+end
+
+subgraph CONTROL["容器控制"]
+    V[docker ps -a]
+    W[docker stop]
+    X[docker rm]
+end
+
+A --> B --> C --> D --> E --> F --> G --> H --> I
+I --> J --> K --> L --> M --> N
+N --> O --> P --> Q --> R --> S
+S --> T --> U
+U --> V --> W --> X
+```
+
 # Docker
 
 在學習程式開發的過程中

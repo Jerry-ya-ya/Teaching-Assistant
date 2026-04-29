@@ -1,7 +1,5 @@
 [回到Readme](/Readme.md)
 
-<div style="overflow-x: auto;">
-
 ```mermaid
 flowchart LR
 
@@ -23,8 +21,6 @@ end
 F --> X --> G
 H --> I
 ```
-
-</div>
 
 # 初始化跟第一次上傳
 
