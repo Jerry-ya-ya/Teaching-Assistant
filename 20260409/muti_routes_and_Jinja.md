@@ -329,6 +329,194 @@ Jinja 是一個模板引擎
 
 它的工作就是把 Python 資料「填進」HTML
 
+它的工作就是把 Python 資料「填進」HTML
 
+讓原本固定不變的 HTML
+
+變成可以根據資料改變的動態頁面
+
+例如
+
+原本 HTML 只能寫死
+
+```bash
+<h1>Hello, Jerry</h1>
+```
+
+但使用 Jinja 之後
+
+我們可以在主頁加上
+
+```bash
+<h1>Hello, {{ name }}</h1>
+```
+
+然後在 Flask 後端傳入資料
+
+修改一下主路由
+
+```bash
+@app.route("/")
+def home():
+    return render_template("index.html", name="Jerry")
+```
+
+這樣網頁顯示時，{{ name }} 就會被替換成 Jerry
+
+也就是說
+
+```bash
+Python 資料
+   ↓
+Jinja 模板
+   ↓
+HTML 頁面
+   ↓
+瀏覽器顯示
+```
+
+Jinja 最常見的用途有三個
+
+第一個是顯示變數
+
+例如使用者名稱、文章標題、商品價格
+
+```bash
+<p>使用者名稱：{{ username }}</p>
+<p>文章標題：{{ item }}</p>
+<p>商品價格：{{ cost }}</p>
+```
+
+第二個是使用條件判斷
+
+根據不同情況顯示不同內容
+
+```bash
+{% if is_login %}
+    <p>歡迎回來</p>
+{% else %}
+    <p>請先登入</p>
+{% endif %}
+```
+
+第三個是使用迴圈
+
+把一整串資料顯示在畫面上
+
+```bash
+    <ul>
+        {% for item in items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+```
+
+所以我們可以把 Jinja 理解成
+
+讓 HTML 不只是固定文字
+
+而是可以接收後端資料、產生不同畫面的工具
+
+不過要注意
+
+Jinja 和 JavaScript 不一樣
+
+Jinja 是在「伺服器端」先把 HTML 產生好
+
+也就是渲染伺服器端渲染（Server-Side Rendering, SSR）
+
+再送給瀏覽器
+
+使用者 → Flask → Jinja 產生 HTML → 瀏覽器顯示
+
+JavaScript 則是在「瀏覽器端」執行
+
+用來處理使用者互動
+
+（像 React、Vue、Angular）多半是「用戶端渲染（Client-Side Rendering, CSR）
+
+HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產生畫面
+
+使用者 → 拿到空 HTML → JavaScript → 動態生成畫面
+
+就不跟大家細聊語法這些的
+
+我們現在直接用 Jinjia 來幫我們做分頁跳轉的導覽行跟頁尾
+
+剛剛我們建立了多個路由
+
+也試過用改變連結的方式切換到其他路由
+
+現在我們可以利用 HTML 建立超連結字串
+
+在主頁 HTML 的 <body> 前段加上
+
+```bash
+    <nav>
+        <a href="{{ url_for('index') }}">首頁</a>
+        <a href="{{ url_for('about') }}">關於我們</a>
+        <a href="{{ url_for('html_tags') }}">HTML 展示</a>
+    </nav>
+```
+
+這樣應該可以透過點擊連結進到我們剛剛建立的兩個新路由頁面
+
+但是你會發現跳轉用的導覽行沒有跟著過來
+
+也就是你每次都要自己貼一次
+
+那如果今天老闆叫我們做店商平台
+
+面對成千上萬個產品頁面
+
+就算我們加班把 Ctrl C Ctrl V 按冒煙也改不完
+
+所以我們要把頁面拆成三個部分
+
+頭部導覽行、中段頁面資料跟尾段頁尾
+
+我們要利用 Jinja 把前段後端固定
+
+以後修改一次前段或後段的修改就完成任務了
+
+所以我們新增一個 base.html
+
+```bash
+    <nav>
+        <a href="{{ url_for('home') }}">首頁</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+
+    <hr>
+
+    {% block content %}{% endblock %}
+```
+
+修改一下所有的 HTML 頁面
+
+格式如下
+
+```bash
+    {% extends "base.html" %}
+
+    {% block content %}
+    !原本的內容 自行修改!
+    {% endblock %}
+```
+
+修改完後記得全選後儲存
+
+之後打開網頁熱重啟應該就更新好了
+
+點看看導覽行的超連結
+
+應該會看到導覽行跟過來了
+
+至此
+
+我們完成了
+
+網站多路由、多頁面跟動態的導覽行
 
 [回到Readme](/Readme.md)

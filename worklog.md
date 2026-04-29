@@ -12,13 +12,13 @@
 
 - Added chapter: index.
 
-- Added chapter: 1st lecture notes, first time of git init and push.
+- Added chapter: 20260305 lecture notes, first time of git init and push.
 
-- Added chapter: 2nd lecture notes, using git to countinue the development of app.
+- Added chapter: 20260312 lecture notes, using git to countinue the development of app.
 
 ## 2026/03/14
 
-- Added chapter: 3rd lecture notes, using Docker to build up Flask app.
+- Added chapter: 20260319 lecture notes, using Docker to build up Flask app.
 
 ## 2026/03/18
 
@@ -26,7 +26,7 @@
 
 ## 2026/03/23
 
-- Added chapter: 4th lecture notes, using Render to deploy container.
+- Added chapter: 20260326 lecture notes, using Render to deploy container.
 
 ## 2026/03/24
 
@@ -47,3 +47,7 @@
 - Added a Mermaid diagram to the 20260319 lecture notes.
 
 - Added a Mermaid diagram to the 20260326 lecture notes.
+
+## 2026/04/30
+
+- Added chapter: 20260409 lecture notes, multi-route pages and dynamic Jinja navbar.
