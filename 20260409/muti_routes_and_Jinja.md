@@ -1,5 +1,67 @@
 [回到Readme](/Readme.md)
 
+```mermaid
+flowchart LR
+
+subgraph BASIC["Flask 基礎"]
+    A[單一路由回傳文字]
+    B[改為回傳 HTML]
+    C[理解 HTML 結構]
+end
+
+subgraph TEMPLATE["模板化"]
+    D[使用 render_template]
+    E[建立 templates 資料夾]
+    F[建立 index.html]
+end
+
+subgraph ROUTES["多路由"]
+    G[新增路由]
+    H[建立多個 HTML 頁面]
+    I[透過網址切換頁面]
+end
+
+subgraph STATIC["靜態資源"]
+    J[建立 static 資料夾]
+    K[分離 CSS]
+    L[透過 url_for 引入 CSS]
+end
+
+subgraph JINJA["Jinja 動態模板"]
+    M[傳入變數]
+    N[條件判斷]
+    O[迴圈顯示資料]
+end
+
+subgraph NAVBAR["導覽列"]
+    P[使用超連結]
+    Q[url_for 路由跳轉]
+end
+
+subgraph LAYOUT["版型繼承"]
+    R[建立 base.html]
+    S[使用 extends]
+    T[使用 block content]
+end
+
+subgraph RESULT["最終效果"]
+    U[多頁面網站]
+    V[共用導覽列]
+    W[動態內容]
+end
+
+A --> B --> C
+C --> D --> E --> F
+F --> G --> H --> I
+I --> J --> K --> L
+L --> M --> N --> O
+O --> P --> Q
+Q --> R --> S --> T
+T --> U --> V --> W
+```
+
+
+
 上一次我們把最小可以用的 Flask 上傳到 Render 裡面了
 
 現在的結構應該長這樣
@@ -172,7 +234,7 @@ def html_tags():
 
 在 templates 裡面新增一個 html_tags.html
 
-之後把 https://zero1-a6o5.onrender.com/html_tags 裡面的 html 抄下來
+之後把 [https://zero1-a6o5.onrender.com/html_tags](https://zero1-a6o5.onrender.com/html_tags) 裡面的 html 抄下來
 
 一樣存檔後刷新你的瀏覽器就可以看到你剛剛抄的內容了
 
@@ -223,6 +285,7 @@ def html_tags():
 也是唯一能讓網頁 活起來 的關鍵
 
 網頁三巨頭
+
 - HTML 標記語言（Markup）
 - CSS 樣式語言（Style）
 - JavaScripts 程式語言（Programming）
@@ -299,6 +362,7 @@ body {
 這種寫法在 Flask 也可以但是不建議
 
 因為但是因為 Flask 會幫你
+
 - 處理路徑
 - 部署到不同環境不會壞掉
 - 支援版本控制（cache busting）
@@ -449,7 +513,7 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 現在我們可以利用 HTML 建立超連結字串
 
-在主頁 HTML 的 <body> 前段加上
+在主頁 HTML 的  前段加上
 
 ```bash
     <nav>

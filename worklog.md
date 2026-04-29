@@ -51,3 +51,5 @@
 ## 2026/04/30
 
 - Added chapter: 20260409 lecture notes, multi-route pages and dynamic Jinja navbar.
+
+- Added a Mermaid diagram to the 20260409 lecture notes.
