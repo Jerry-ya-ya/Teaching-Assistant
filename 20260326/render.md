@@ -1,5 +1,59 @@
 [回到Readme](/Readme.md)
 
+```mermaid
+flowchart LR
+
+subgraph LOCAL_SETUP["本地虛擬環境"]
+    A[檢查 Python]
+    B[建立 venv]
+    C[啟動 venv]
+    D[安裝 requirements]
+    E[確認套件 pip list]
+    F[執行 Flask]
+end
+
+subgraph GIT["版本控制"]
+    G[修改專案]
+    H[git add]
+    I[git commit]
+    J[git push]
+end
+
+subgraph DEPLOY_TYPE["部署方式選擇"]
+    K[本地部署]
+    L[雲端部署]
+end
+
+subgraph RENDER["Render 部署流程"]
+    M[登入 Render]
+    N[建立 Web Service]
+    O[連接 GitHub Repo]
+    P[選擇分支]
+    Q[設定 Docker 或環境]
+    R[Deploy]
+    S[取得網址]
+end
+
+subgraph PROBLEM["問題修正"]
+    T[127.0.0.1 無法對外]
+    U[使用 Gunicorn]
+    V[監聽外部 port]
+end
+
+subgraph AUTO_DEPLOY["自動部署"]
+    W[push 新版本]
+    X[Render 自動更新]
+end
+
+A --> B --> C --> D --> E --> F
+F --> G --> H --> I --> J
+J --> K
+J --> L
+L --> M --> N --> O --> P --> Q --> R --> S
+S --> T --> U --> V
+V --> W --> X
+```
+
 # Render
 
 ## 因應 Docker 無法使用補充本地化虛擬環境

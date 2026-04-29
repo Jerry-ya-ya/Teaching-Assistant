@@ -45,3 +45,5 @@
 - Added a Mermaid diagram to the 20260312 lecture notes.
 
 - Added a Mermaid diagram to the 20260319 lecture notes.
+
+- Added a Mermaid diagram to the 20260326 lecture notes.
