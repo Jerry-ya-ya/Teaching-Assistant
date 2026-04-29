@@ -37,3 +37,7 @@
 - Added chapter: 5th lecture notes, using render_template and making multiple routes.
 
 - Update chapter: add content of the 5th lecture.
+
+## 2026/04/29
+
+- Added a Mermaid diagram to the first lecture notes.

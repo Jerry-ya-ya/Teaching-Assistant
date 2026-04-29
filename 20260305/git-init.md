@@ -1,5 +1,31 @@
 [回到Readme](/Readme.md)
 
+<div style="overflow-x: auto;">
+
+```mermaid
+flowchart LR
+
+subgraph LOCAL[本地操作]
+    A[安裝 Git] --> B[git --version] --> C[git init]
+    C --> D[修改或新增檔案] --> E[git add .] --> F[git commit]
+end
+
+X(( ))
+
+subgraph GITHUB[GitHub]
+    G[建立 Repository] --> H[取得 URL]
+end
+
+subgraph DEPLOY[連接與上傳]
+    I[git remote add origin] --> J[git branch -M main] --> K[git push]
+end
+
+F --> X --> G
+H --> I
+```
+
+</div>
+
 # 初始化跟第一次上傳
 
 ## Git 倉庫初始化 & 第一次提交
