@@ -25,6 +25,45 @@ d3v1at10n
 - [20260611-???]
 - [20260625-???]
 
+# 課程路線圖
+
+```mermaid
+flowchart LR
+
+%% ===== 分類 =====
+classDef git fill:#1f77b4,color:#fff,stroke:#0d3c61,stroke-width:2px;
+classDef docker fill:#2ca02c,color:#fff,stroke:#145a14,stroke-width:2px;
+classDef deploy fill:#ff7f0e,color:#fff,stroke:#7a3b00,stroke-width:2px;
+classDef web fill:#9467bd,color:#fff,stroke:#4b2c6f,stroke-width:2px;
+classDef db fill:#d62728,color:#fff,stroke:#6b0f0f,stroke-width:2px;
+classDef advanced fill:#17becf,color:#fff,stroke:#0b4f57,stroke-width:2px;
+
+%% ===== Git =====
+A[Git 初始化]:::git --> B[跨裝置開發]:::git
+
+%% ===== Docker =====
+B --> C[Docker 環境]:::docker
+
+%% ===== Deploy =====
+C --> D[Render 部署]:::deploy
+
+%% ===== Web =====
+D --> E[多路由 + Jinja]:::web
+E --> F[Blueprint + Factory]:::web
+
+%% ===== DB =====
+F --> G[SQLite + Env]:::db
+G --> H[PostgreSQL]:::db
+H --> I[CRUD]:::db
+
+%% ===== API =====
+I --> J[API + JSON]:::advanced
+
+%% ===== Advanced =====
+J --> K[Web Crawler]:::advanced
+K --> L[Dev Test Prod]:::advanced
+```
+
 # 前言
 
 大家好，我是這學期的助教。
