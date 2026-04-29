@@ -1,5 +1,49 @@
 [回到Readme](/Readme.md)
 
+```mermaid
+flowchart LR
+
+subgraph LOCAL_SETUP[新裝置準備]
+    A[git --version]
+    B[建立資料夾]
+    C[git clone repo]
+    D[進入專案資料夾]
+end
+
+subgraph BRANCH_CHECK[分支檢查]
+    E[git branch -a]
+    F[確認目前所在分支]
+end
+
+subgraph GITHUB[GitHub 操作]
+    G[建立新分支]
+end
+
+subgraph SYNC[同步遠端]
+    H[git fetch]
+    I[git pull]
+end
+
+subgraph SWITCH[切換分支]
+    J[git switch -c branch origin/branch]
+    K[再次檢查分支 git branch -a]
+end
+
+subgraph WORKFLOW[日常開發流程]
+    L[修改檔案]
+    M[git add .]
+    N[git commit]
+    O[git push]
+end
+
+A --> B --> C --> D
+D --> E --> F
+F --> G
+G --> H --> I
+I --> J --> K
+K --> L --> M --> N --> O
+```
+
 # 在另一台裝置接續開發
 
 如果我們需要在「另一個裝置」上繼續開發我們已經建立好、更新過的repo，可以使用以下操作接續開發

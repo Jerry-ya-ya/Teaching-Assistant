@@ -41,3 +41,5 @@
 ## 2026/04/29
 
 - Added a Mermaid diagram to the first lecture notes.
+
+- Added a Mermaid diagram to the second lecture notes.
