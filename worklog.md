@@ -34,9 +34,9 @@
 
 - Compiled the semester’s teaching syllabus and created the related course files.
 
-- Added chapter: 5th lecture notes, using render_template and making multiple routes.
+- Added chapter: 20260409 lecture notes, using render_template and making multiple routes.
 
-- Update chapter: add content of the 5th lecture.
+- Update chapter: add content of the 20260409 lecture.
 
 ## 2026/04/29
 
@@ -55,3 +55,5 @@
 - Added a Mermaid diagram to the 20260409 lecture notes.
 
 - Added a course map to the main README.
+
+- Update chapter: add content of the 20260409 lecture.

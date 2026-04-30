@@ -234,7 +234,354 @@ def html_tags():
 
 在 templates 裡面新增一個 html_tags.html
 
-之後把 [https://zero1-a6o5.onrender.com/html_tags](https://zero1-a6o5.onrender.com/html_tags) 裡面的 html 抄下來
+之後把這些東西放進去
+
+```bash
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML 標籤總覽教學頁</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+
+    header, footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #444;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 20px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    h1, h2, h3 {
+      color: #1d3557;
+    }
+
+    code {
+      background-color: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 12px;
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      max-width: 500px;
+    }
+
+    input, select, textarea, button {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    .tag-box {
+      background: #f1f5f9;
+      border-left: 5px solid #457b9d;
+      padding: 12px;
+      margin: 10px 0;
+    }
+
+    mark {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="/">回到首頁</a>
+    <section id="text">
+      <h2>1. 文字標籤</h2>
+
+      <div class="tag-box">
+        <h1>&lt;h1&gt; 標題 1</h1>
+        <h2>&lt;h2&gt; 標題 2</h2>
+        <h3>&lt;h3&gt; 標題 3</h3>
+        <p>這是 <code>&lt;p&gt;</code> 段落標籤。</p>
+      </div>
+
+      <div class="tag-box">
+        <p><strong>&lt;strong&gt;</strong> 表示重要內容</p>
+        <p><b>&lt;b&gt;</b> 表示粗體文字</p>
+        <p><em>&lt;em&gt;</em> 表示強調語氣</p>
+        <p><i>&lt;i&gt;</i> 表示斜體文字</p>
+        <p><u>&lt;u&gt;</u> 表示底線</p>
+        <p><mark>&lt;mark&gt;</mark> 表示標記重點</p>
+        <p><small>&lt;small&gt;</small> 表示較小文字</p>
+        <p><del>&lt;del&gt;</del> 表示刪除線</p>
+        <p><ins>&lt;ins&gt;</ins> 表示新增文字</p>
+        <p>H<sub>2</sub>O 使用了 <code>&lt;sub&gt;</code></p>
+        <p>x<sup>2</sup> 使用了 <code>&lt;sup&gt;</code></p>
+      </div>
+
+      <div class="tag-box">
+        <p><abbr title="HyperText Markup Language">&lt;abbr&gt; HTML</abbr></p>
+        <blockquote>
+          這是 <code>&lt;blockquote&gt;</code>，通常用來表示一大段引用內容。
+        </blockquote>
+        <p>這是 <q>&lt;q&gt; 行內引用</q></p>
+        <p><code>&lt;code&gt; let x = 10;</code></p>
+        <pre>
+&lt;pre&gt;
+保留原本空白與換行
+很適合放程式碼
+&lt;/pre&gt;
+        </pre>
+      </div>
+    </section>
+
+    <section id="links-media">
+      <h2>2. 連結與媒體</h2>
+
+      <div class="tag-box">
+        <p>
+          <a href="https://developer.mozilla.org/" target="_blank">
+            &lt;a&gt; 連結到 MDN
+          </a>
+        </p>
+      </div>
+
+      <div class="tag-box">
+        <p>這是 <code>&lt;img&gt;</code> 圖片：</p>
+        <img src="https://via.placeholder.com/200x120" alt="示意圖片">
+      </div>
+
+      <div class="tag-box">
+        <p>這是 <code>&lt;audio&gt;</code>：</p>
+        <audio controls>
+          <source src="" type="audio/mpeg">
+          你的瀏覽器不支援 audio。
+        </audio>
+
+        <p>這是 <code>&lt;video&gt;</code>：</p>
+        <video controls width="320">
+          <source src="" type="video/mp4">
+          你的瀏覽器不支援 video。
+        </video>
+      </div>
+    </section>
+
+    <section id="lists">
+      <h2>3. 清單標籤</h2>
+
+      <div class="tag-box">
+        <h3>&lt;ul&gt; 無序清單</h3>
+        <ul>
+          <li>蘋果</li>
+          <li>香蕉</li>
+          <li>葡萄</li>
+        </ul>
+      </div>
+
+      <div class="tag-box">
+        <h3>&lt;ol&gt; 有序清單</h3>
+        <ol>
+          <li>起床</li>
+          <li>刷牙</li>
+          <li>出門</li>
+        </ol>
+      </div>
+
+      <div class="tag-box">
+        <h3>&lt;dl&gt; 定義清單</h3>
+        <dl>
+          <dt>HTML</dt>
+          <dd>用來建立網頁結構</dd>
+          <dt>CSS</dt>
+          <dd>用來設計樣式</dd>
+          <dt>JavaScript</dt>
+          <dd>用來增加互動功能</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="table">
+      <h2>4. 表格標籤</h2>
+
+      <table>
+        <caption>這是 &lt;caption&gt; 表格標題</caption>
+        <thead>
+          <tr>
+            <th>標籤</th>
+            <th>用途</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&lt;table&gt;</td>
+            <td>建立表格</td>
+          </tr>
+          <tr>
+            <td>&lt;tr&gt;</td>
+            <td>表格列</td>
+          </tr>
+          <tr>
+            <td>&lt;th&gt;</td>
+            <td>表頭儲存格</td>
+          </tr>
+          <tr>
+            <td>&lt;td&gt;</td>
+            <td>一般儲存格</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="form">
+      <h2>5. 表單標籤</h2>
+
+      <form>
+        <label for="username">使用者名稱（&lt;label&gt; + &lt;input&gt;）</label>
+        <input type="text" id="username" name="username" placeholder="請輸入名稱">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+
+        <label for="password">密碼</label>
+        <input type="password" id="password" name="password">
+
+        <label for="age">年齡</label>
+        <input type="number" id="age" name="age">
+
+        <label for="birthday">生日</label>
+        <input type="date" id="birthday" name="birthday">
+
+        <label>性別（radio）</label>
+        <div>
+          <input type="radio" id="male" name="gender" value="male">
+          <label for="male">男</label>
+
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">女</label>
+        </div>
+
+        <label>興趣（checkbox）</label>
+        <div>
+          <input type="checkbox" id="coding" name="interest" value="coding">
+          <label for="coding">程式設計</label>
+
+          <input type="checkbox" id="music" name="interest" value="music">
+          <label for="music">音樂</label>
+        </div>
+
+        <label for="city">城市（&lt;select&gt;）</label>
+        <select id="city" name="city">
+          <option value="">請選擇</option>
+          <option value="taipei">台北</option>
+          <option value="taichung">台中</option>
+          <option value="kaohsiung">高雄</option>
+        </select>
+
+        <label for="message">留言（&lt;textarea&gt;）</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+
+        <button type="submit">&lt;button&gt; 送出</button>
+      </form>
+    </section>
+
+    <section id="semantic">
+      <h2>6. 語意化標籤</h2>
+
+      <div class="tag-box">
+        <p><code>&lt;header&gt;</code>：頁首區域</p>
+        <p><code>&lt;nav&gt;</code>：導覽列</p>
+        <p><code>&lt;main&gt;</code>：主要內容</p>
+        <p><code>&lt;section&gt;</code>：內容區段</p>
+        <p><code>&lt;article&gt;</code>：獨立文章內容</p>
+        <p><code>&lt;aside&gt;</code>：側邊補充資訊</p>
+        <p><code>&lt;footer&gt;</code>：頁尾區域</p>
+      </div>
+
+      <article class="tag-box">
+        <h3>&lt;article&gt; 範例</h3>
+        <p>這是一篇獨立內容，例如一篇文章、一則貼文或一個新聞項目。</p>
+      </article>
+
+      <aside class="tag-box">
+        <h3>&lt;aside&gt; 範例</h3>
+        <p>這裡可以放補充說明、推薦文章或廣告。</p>
+      </aside>
+    </section>
+
+    <section>
+      <h2>7. 常見區塊標籤</h2>
+
+      <div class="tag-box">
+        <p><code>&lt;div&gt;</code> 是常見的區塊容器。</p>
+        <div style="padding:10px; background:#ddd;">這是一個 div</div>
+      </div>
+
+      <div class="tag-box">
+        <p><code>&lt;span&gt;</code> 是行內容器。</p>
+        <p>這是一段文字，裡面的 <span style="color:red;">span 文字</span> 被改成紅色。</p>
+      </div>
+
+      <div class="tag-box">
+        <p><code>&lt;br&gt;</code> 會換行<br>這就是換行後的內容。</p>
+        <p><code>&lt;hr&gt;</code> 會產生水平線：</p>
+        <hr>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>HTML 標籤總覽頁示範完成</p>
+  </footer>
+</body>
+</html>
+```
 
 一樣存檔後刷新你的瀏覽器就可以看到你剛剛抄的內容了
 
