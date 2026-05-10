@@ -57,3 +57,7 @@
 - Added a course map to the main README.
 
 - Update chapter: add content of the 20260409 lecture.
+
+## 2026/05/07
+
+- Added chapter: Created environment variable files and connected to SQLite.And Adjust the teaching order.

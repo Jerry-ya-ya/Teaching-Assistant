@@ -864,8 +864,7 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 ```bash
     <nav>
-        <a href="{{ url_for('index') }}">首頁</a>
-        <a href="{{ url_for('about') }}">關於我們</a>
+        <a href="{{ url_for('home) }}">首頁</a>
         <a href="{{ url_for('html_tags') }}">HTML 展示</a>
     </nav>
 ```
@@ -895,8 +894,7 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 ```bash
     <nav>
         <a href="{{ url_for('home') }}">首頁</a>
-        <a href="{{ url_for('about') }}">About</a>
-        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('html_tags') }}">HTML 展示</a>
     </nav>
 
     <hr>
@@ -908,11 +906,25 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 格式如下
 
+{% extends "base.html" %}
+
+{% block content %}
+
+!原本的內容 自行修改!
+
+{% endblock %}
+
 ```bash
     {% extends "base.html" %}
 
     {% block content %}
-    !原本的內容 自行修改!
+```
+
+```bash
+!原本的內容 自行修改!
+```
+
+```bash
     {% endblock %}
 ```
 
