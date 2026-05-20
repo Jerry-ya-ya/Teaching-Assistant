@@ -58,6 +58,10 @@
 
 - Update chapter: add content of the 20260409 lecture.
 
-## 2026/05/07
+## 2026/05/10
 
 - Added chapter: Created environment variable files and connected to SQLite.And Adjust the teaching order.
+
+## 2026/05/20
+
+- Added chapter: Render Cloud PostgreSQL Connection and Table Inspection with pgAdmin.

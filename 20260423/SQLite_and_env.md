@@ -36,7 +36,6 @@ SQLite 是一種輕量級資料庫
 ```bash
 python-dotenv
 Flask-SQLAlchemy
-python-dotenv
 ```
 
 建立一個叫 .env 的檔案
@@ -119,6 +118,7 @@ instance/
 在 app.py 修改
 
 ```bash
+import os
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
