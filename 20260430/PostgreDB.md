@@ -217,6 +217,32 @@ def update_todo(id):
     return redirect("/todo")
 ```
 
+```bash
+{% for todo in todos %}
+
+                <li>
+
+                    <form
+                        action="/update/{{ todo.id }}"
+                        method="POST"
+                    >
+
+                        <input
+                            type="text"
+                            name="content"
+                            value="{{ todo.content }}"
+                        >
+
+                        <button type="submit">
+                            更新
+                        </button>
+
+                    </form>
+
+                </li>
+            {% endfor %}
+```
+
 本地測試完成之後利用日常三步驟把更新好的程式推送到遠端
 
 接下來是利用 Postgre 查表程式 pgAdmin4
