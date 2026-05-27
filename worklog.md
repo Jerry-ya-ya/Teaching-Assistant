@@ -65,3 +65,7 @@
 ## 2026/05/20
 
 - Added chapter: Render Cloud PostgreSQL Connection and Table Inspection with pgAdmin.
+
+## 2026/05/27
+
+- Added chapter: Static web scraper.
