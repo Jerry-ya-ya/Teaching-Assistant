@@ -304,7 +304,13 @@ DDoS（Distributed Denial of Service）
 requests
 ```
 
-然後在主程式建立一個新的路由
+然後在主程式引入
+
+```bash
+import requests
+```
+
+建立一個新的路由
 
 ```bash
 @app.route("/news")
@@ -363,7 +369,13 @@ BeautifulSoup 會把 HTML 轉換成可搜尋的結構
 
 再來
 
-修改主程式的 news 路由
+然後在主程式引入
+
+```bash
+from bs4 import BeautifulSoup
+```
+
+修改 news 路由
 
 ```bash
     soup = BeautifulSoup(

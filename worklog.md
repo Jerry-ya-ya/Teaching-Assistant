@@ -69,3 +69,7 @@
 ## 2026/05/27
 
 - Added chapter: Static web scraper.
+
+## 2026/05/29
+
+- Update course flow and fix TOC page navigation issues.
