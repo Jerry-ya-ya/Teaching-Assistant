@@ -73,3 +73,7 @@
 ## 2026/05/29
 
 - Update course flow and fix TOC page navigation issues.
+
+## 2026/06/03
+
+- Added chapter: Dynamic web scraper.
