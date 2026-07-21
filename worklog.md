@@ -81,3 +81,7 @@
 ## 2026/07/21
 
 - Reorganized lecture notes from date-based folders into topic-based directories for Git, containerization, deployment, and Flask, and updated the main README course directory and links to match the new project structure.
+
+## 2026/07/22
+
+- Added a Kubernetes chapter covering core concepts, Minikube, Chocolatey, kubectl, and a basic Nginx deployment, and added its navigation link to the main README.
