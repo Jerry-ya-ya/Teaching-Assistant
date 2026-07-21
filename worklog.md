@@ -77,3 +77,7 @@
 ## 2026/06/03
 
 - Added chapter: Dynamic web scraper.
+
+## 2026/07/21
+
+- Reorganized lecture notes from date-based folders into topic-based directories for Git, containerization, deployment, and Flask, and updated the main README course directory and links to match the new project structure.

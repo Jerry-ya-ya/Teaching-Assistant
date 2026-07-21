@@ -10,20 +10,32 @@ d3v1at10n
 - [頁首](#頁首)
 - [目錄](#目錄)
 - [前言](#前言)
-- [20260305-Git初始化跟第一次上傳](/20260305/git-init.md)
-- [20260312-使用Git在另外一台裝置接續開發](/20260312/git-continue-dev.md)
-- [20260319-學習安裝並使用Docker](/20260319/docker.md)
-- [20260326-使用Render將網站發布公網](/20260326/render.md)
-- [20260409-多路由與Jinja模板](/20260409/muti_routes_and_Jinja.md)
-- [20260423-SQLite與環境變數](/20260423/SQLite_and_env.md)
-- [20260430-Postgre資料庫與PostgreDesktop](/20260430/PostgreDB.md)
-- [20260507-靜態網路爬蟲](/20260507/static_webcrawler.md)
-- [20260514-動態網路爬蟲](/20260514/dynamic_webcrawler.md)
-- [20260521-Api與JSON資料](/20260521/api_and_JSON.md)
-- [20260528-藍圖化與工廠模式](/20260528/blueprint_and_factory.md)
-- [20260604-程式的三種環境](/20260604/dev_test_and_prod.md)
-- [20260611-???]
-- [20260625-???]
+
+## Git & Github
+
+- [Git初始化跟第一次上傳](/git/git_init.md)
+- [使用Git在另外一台裝置接續開發](/git/git_continue_dev.md)
+
+## 容器化
+
+- [學習安裝並使用Docker](/containerization/docker.md)
+
+## 發佈
+
+- [使用Render將網站發布公網](/launch/render.md)
+
+## 資料庫
+
+- [Postgre資料庫與PostgreDesktop](/flask/PostgreDB.md)
+
+## Flask
+- [多路由與Jinja模板](/flask/muti_routes_and_Jinja.md)
+- [SQLite與環境變數](/flask/SQLite_and_env.md)
+- [靜態網路爬蟲](/flask/static_webcrawler.md)
+- [動態網路爬蟲](/flask/dynamic_webcrawler.md)
+- [Api與JSON資料](/flask/api_and_JSON.md)
+- [藍圖化與工廠模式](/flask/blueprint_and_factory.md)
+- [程式的三種環境](/flask/dev_test_and_prod.md)
 
 # 課程路線圖
 
