@@ -85,3 +85,7 @@
 ## 2026/07/22
 
 - Added a Kubernetes chapter covering core concepts, Minikube, Chocolatey, kubectl, and a basic Nginx deployment, and added its navigation link to the main README.
+
+## 2026/08/02
+
+- Added an API design chapter covering API boundaries, frontend and backend responsibilities, business intent, transaction consistency, and layered backend services, and added its navigation link to the main README.
