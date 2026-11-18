@@ -1,5 +1,7 @@
 [回到Readme](/Readme.md)
 
+# 靜態網路爬蟲
+
 什麼是網路爬蟲（Web Scraping）
 
 網路爬蟲（Web Scraping）是利用程式自動取得網站上的資料
@@ -17,7 +19,9 @@
 
 爬蟲的基本流程
 
-```bash
+**流程／資料示意**
+
+```text
 程式發送請求
     ↓
 網站回傳 HTML
@@ -134,7 +138,9 @@ AI 時代很多競爭
 
 這是很重要的部分
 
-不要對網站瘋狂發送 Request
+> [!WARNING]
+> **控制請求頻率**
+> 避免短時間大量發送請求；加入延遲、快取資料，並遵守目標網站的使用規則。
 
 這會造成網站負擔
 
@@ -276,11 +282,7 @@ DDoS（Distributed Denial of Service）
 
 這次的新資料就會自己排好顯示給使用者
 
-好
-
-講了這麼多先輩知識
-
-現在就要實做爬蟲了
+了解先備知識後，接著實作爬蟲。
 
 這次我們先做統整爬蟲
 
@@ -300,19 +302,25 @@ DDoS（Distributed Denial of Service）
 
 在 requirements 加入
 
-```bash
+**套件清單：`requirements.txt`（新增）**
+
+```text
 requests
 ```
 
 然後在主程式引入
 
-```bash
+**程式碼（Python）**
+
+```python
 import requests
 ```
 
 建立一個新的路由
 
-```bash
+**程式碼（Python）**
+
+```python
 @app.route("/news")
 def news():
 
@@ -325,7 +333,9 @@ def news():
 
 在 navbar.html 新增一個頁面切換的超連結
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <a href="{{ url_for('news') }}">Hacknews</a>
 ```
 
@@ -351,7 +361,9 @@ def news():
 
 在 requirements 加入
 
-```bash
+**套件清單：`requirements.txt`（新增）**
+
+```text
 bs4
 ```
 
@@ -371,13 +383,17 @@ BeautifulSoup 會把 HTML 轉換成可搜尋的結構
 
 然後在主程式引入
 
-```bash
+**程式碼（Python）**
+
+```python
 from bs4 import BeautifulSoup
 ```
 
 修改 news 路由
 
-```bash
+**程式碼（Python）**
+
+```python
     soup = BeautifulSoup(
         response.text,
         "html.parser"
@@ -417,7 +433,9 @@ from bs4 import BeautifulSoup
 
 現在我們來改一下剛剛路由
 
-```bash
+**程式碼（Python）**
+
+```python
     news_list = []
 
     for title in titles:
@@ -437,9 +455,13 @@ from bs4 import BeautifulSoup
 
 剛剛返回的都是純文字
 
-現在我們要在 templates 裡面新增一個 HTML 才能給使用者一個頁面
+> [!TIP]
+> **建立檔案：`templates/news.html`**
+> 在 `templates/` 資料夾新增 `news.html`，填入下方新聞清單頁面，檔名須與 `render_template("news.html")` 一致。
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -489,7 +511,9 @@ from bs4 import BeautifulSoup
 
 應該會有一個
 
-```bash
+**網址路徑範例**
+
+```text
 /from?site=science.org
 ```
 
@@ -503,7 +527,9 @@ from bs4 import BeautifulSoup
 
 看一下它跟可用文章標題的 HTML 標籤有什麼不同
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <td class="title">
     <span class="titleline">
         <a href="https://www.diffuseai.pub/p/the-structural-barriers-to-ai-lawyers">
@@ -526,7 +552,9 @@ from bs4 import BeautifulSoup
 
 我們想要的是第三行的連結
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <a href="https://www.diffuseai.pub/p/the-structural-barriers-to-ai-lawyers">
 ```
 
@@ -540,7 +568,9 @@ from bs4 import BeautifulSoup
 
 修改 news 路由
 
-```bash
+**程式碼（Python）**
+
+```python
     titles = soup.select(".titleline")
 
     news_list = []

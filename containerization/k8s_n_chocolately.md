@@ -97,7 +97,6 @@ flowchart LR
     ReplicaSet --> Pod2
     ReplicaSet --> Pod3
 
-
     subgraph Kubernetes Cluster
 
         subgraph Control Plane
@@ -138,6 +137,8 @@ flowchart LR
 
 需要先買
 
+**流程／資料示意**
+
 ```text
 30000 元主機 × 3 台
 +
@@ -162,6 +163,8 @@ Storage Server
 
 甚至可以想成
 
+**流程／資料示意**
+
 ```text
 真實世界：
 
@@ -185,6 +188,8 @@ Minikube：
 這是為了讓我們以後可以一次管理多台電腦做準備與訓練
 
 也就是真正的 Kubernetes
+
+**流程／資料示意**
 
 ```text
 50 台電腦
@@ -226,6 +231,8 @@ choco 是 Chocolatey 的命令列工具（CLI）
 
 現在在你的裝置上面檢查一下安裝過工具了沒了
 
+**終端機指令（PowerShell）**
+
 ```powershell
 choco --version
 ```
@@ -237,7 +244,9 @@ choco --version
 執行以下指令
 
 > [!CAUTION]
-> 以 系統管理員身分 執行指令要五千萬分小心
+> 此安裝指令會下載並以系統管理員權限執行安裝程式；執行前請確認來源與指令內容。
+
+**終端機指令（PowerShell）**
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; `
@@ -255,11 +264,15 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocola
 
 安裝 kubectl（命令列工具）
 
+**終端機指令（PowerShell）**
+
 ```powershell
 choco install kubernetes-cli
 ```
 
 安裝 minikube
+
+**終端機指令（PowerShell）**
 
 ```powershell
 choco install minikube
@@ -267,17 +280,23 @@ choco install minikube
 
 啟動叢集
 
+**終端機指令（PowerShell）**
+
 ```powershell
 minikube start
 ```
 
 驗證是否運作
 
+**終端機指令（PowerShell）**
+
 ```powershell
 kubectl get nodes
 ```
 
 你應該會看到
+**預期輸出**
+
 ```text
 NAME       STATUS   ROLES           AGE   VERSION
 minikube   Ready    control-plane   2m    v1.30.0
@@ -289,11 +308,15 @@ minikube   Ready    control-plane   2m    v1.30.0
 
 建立部署
 
+**終端機指令（PowerShell）**
+
 ```powershell
 kubectl create deployment nginx --image=nginx
 ```
 
 查看狀態
+
+**終端機指令（PowerShell）**
 
 ```powershell
 kubectl get pods
@@ -301,11 +324,15 @@ kubectl get pods
 
 暴露服務
 
+**終端機指令（PowerShell）**
+
 ```powershell
 kubectl expose deployment nginx --type=NodePort --port=80
 ```
 
 取得訪問網址
+
+**終端機指令（PowerShell）**
 
 ```powershell
 minikube service nginx --url

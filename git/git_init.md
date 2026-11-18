@@ -36,6 +36,8 @@ Macs
 
 - Homebrew:
 
+**終端機指令（Bash）**
+
 ```bash
 brew install git
 ```
@@ -44,17 +46,23 @@ or
 
 - MacPorts:
 
+**終端機指令（Bash）**
+
 ```bash
 sudo port install git
 ```
 
 ## 檢查是否安裝 & 檢查安裝版本
 
+**終端機指令（Bash）**
+
 ```bash
 git --version
 ```
 
 ## 本地資料夾初始化
+
+**終端機指令（Bash）**
 
 ```bash
 git init
@@ -64,7 +72,9 @@ git init
 
 進行上傳前需要專案有變化(建立新檔案、修改檔案)
 
-在資料夾內新增一個 README.md
+> [!TIP]
+> **建立檔案：`README.md`**
+> 在專案根目錄新增 `README.md`，寫入專案名稱並存檔，作為第一次提交的變更。
 
 觀察在建立完之後檔案名有沒有顏色變化
 
@@ -78,7 +88,7 @@ git init
 
 點選畫面左邊綠色的New
 
-幫新倉庫取名字(取名很重要，要想一下)
+為新倉庫設定能辨識專案用途的名稱
 可以用的名字會在下方綠色提醒(123 is available.)
 
 其他不用動按建立倉庫
@@ -92,11 +102,15 @@ git init
 
 git remote add origin [空格後貼連結]
 
+**終端機指令（Bash）**
+
 ```bash
 git remote add origin
 ```
 
 ## 加入所有變更 ##
+
+**終端機指令（Bash）**
 
 ```bash
 git add .
@@ -106,17 +120,23 @@ git add .
 
 實作專案的時候請把 "" 改成這次的更新做了什麼
 
+**終端機指令（Bash）**
+
 ```bash
 git commit -m "Connect project to remote Git repository."
 ```
 
 ## 把目前所在的分支（通常是 master）改名為 main
 
+**終端機指令（Bash）**
+
 ```bash
 git branch -M main
 ```
 
 ## 初次推送並設定 Upstream
+
+**終端機指令（Bash）**
 
 ```bash
 git push -u origin main

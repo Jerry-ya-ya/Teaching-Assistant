@@ -1,5 +1,7 @@
 [回到Readme](/Readme.md)
 
+# 多路由與 Jinja 模板
+
 ```mermaid
 flowchart LR
 
@@ -60,13 +62,13 @@ Q --> R --> S --> T
 T --> U --> V --> W
 ```
 
-
-
 上一次我們把最小可以用的 Flask 上傳到 Render 裡面了
 
 現在的結構應該長這樣
 
-```bash
+**程式碼（Python）**
+
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -95,13 +97,17 @@ HTML 解決的是畫面結構（Structure）的問題
 
 把
 
-```bash
+**程式碼（Python）**
+
+```python
 return "Hello, Docker Flask!"
 ```
 
 改成
 
-```bash
+**程式碼（Python）**
+
+```python
 return "<html>
             <head>
                 <title>首頁</title>
@@ -115,7 +121,9 @@ return "<html>
         </html>"
 ```
 
-現在在 app.run 裡面加入 debug=True
+> [!WARNING]
+> **僅在開發環境使用 Debug**
+> 在本地開發用的 `app.run(...)` 加入 `debug=True`；公開部署時請關閉 Debug。
 
 這樣才可以熱重啟
 
@@ -131,13 +139,17 @@ return "<html>
 
 就是因為
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <h1>
 ```
 
 跟
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <a>
 ```
 
@@ -155,8 +167,6 @@ return "<html>
 
 人眼要看這麼雜的東西是很費力的
 
-雜亂的東西也會影響心情
-
 我們就需要把 HTML 抽取出去
 
 那該怎麼抽呢
@@ -171,13 +181,17 @@ return "<html>
 
 把
 
-```bash
+**程式碼（Python）**
+
+```python
 from flask import Flask
 ```
 
 改成
 
-```bash
+**程式碼（Python）**
+
+```python
 from flask import Flask, render_template
 ```
 
@@ -185,17 +199,19 @@ from flask import Flask, render_template
 
 引用好後把根路由那一大串很雜的 HTML 改成
 
-```bash
+**程式碼（Python）**
+
+```python
 return render_template("index.html")
 ```
 
-然後在根目錄建立一個叫 templates 的資料夾
+> [!TIP]
+> **建立檔案：`templates/index.html`**
+> 在專案根目錄建立 `templates/` 資料夾，再新增 `index.html`，填入下方 HTML。
 
-資料夾裡面再建立一個 index.html
+**程式碼（HTML / Jinja）**
 
-index.html 裡面貼上
-
-```bash
+```html
 <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -218,25 +234,27 @@ index.html 裡面貼上
 
 一般來說正常的網頁不會只有一個頁面
 
-拿我們輔仁大學的校網來說
-
-光是導覽行就有八個不同的頁面
+例如學校網站的導覽列，通常會連到多個不同頁面。
 
 所以現在我們來建立一個新的頁面跟他的路由
 
 在主程式的根目錄下面新增一個新的路由
 
-```bash
+**程式碼（Python）**
+
+```python
 @app.route("/html_tags")
 def html_tags():
     return render_template("html_tags.html")
 ```
 
-在 templates 裡面新增一個 html_tags.html
+> [!TIP]
+> **建立檔案：`templates/html_tags.html`**
+> 在 `templates/` 資料夾新增 `html_tags.html`，填入下方 HTML 標籤展示頁。
 
-之後把這些東西放進去
+**程式碼（HTML / Jinja）**
 
-```bash
+```html
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -583,15 +601,7 @@ def html_tags():
 </html>
 ```
 
-一樣存檔後刷新你的瀏覽器就可以看到你剛剛抄的內容了
-
-嗎?
-
-沒有對吧
-
-你沒有看到剛剛抄的內容是因為
-
-路由是不一樣的
+存檔後，需開啟對應的路由，才能看到新建立的頁面。
 
 剛剛建立的是 /html_tags 路由
 
@@ -619,9 +629,7 @@ def html_tags():
 
 裡面是用來放 CSS 的
 
-如果你觀察我的網頁主頁的 HTML
-
-你會發現裡面的最後還多了一個標籤 scripts
+部分網頁的 HTML 最後還會有 `<script>` 標籤
 
 這是 JavaScripts
 
@@ -645,7 +653,7 @@ def html_tags():
 
 如果要重複使用也會更方便
 
-例如我有兩個不同的 HTML
+例如有兩個不同的 HTML 頁面
 
 但是想要用同一個背景
 
@@ -655,7 +663,9 @@ def html_tags():
 
 看到裡面第一個單元是
 
-```bash
+**程式碼（CSS）**
+
+```css
 body {
       font-family: Arial, sans-serif;
       line-height: 1.7;
@@ -678,17 +688,18 @@ body {
 
 現在我們來試試看把 CSS 從 HTML 中分開
 
-在根目錄建立一個 static 資料夾
-
-資料夾裡建立 index.css 檔案
-
-把 style 標籤裡面的所有東西都剪下搬過去 index.html 但是不包含 style 標籤
+> [!TIP]
+> **建立檔案：`static/index.css`**
+> 在專案根目錄建立 `static/` 資料夾，再新增 `index.css`。
+> 把 `templates/html_tags.html` 中 `<style>` 與 `</style>` 之間的 CSS 搬到 `static/index.css`，不要包含 `<style>` 標籤。
 
 之後在剛剛的 HTML 裡面找到 head 頭部標籤
 
 在裡面把我們分離好的 CSS 引入回去
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 ```
 
@@ -702,7 +713,9 @@ body {
 
 像是
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <link rel="stylesheet" href="/static/index.css">
 ```
 
@@ -740,8 +753,6 @@ Jinja 是一個模板引擎
 
 它的工作就是把 Python 資料「填進」HTML
 
-它的工作就是把 Python 資料「填進」HTML
-
 讓原本固定不變的 HTML
 
 變成可以根據資料改變的動態頁面
@@ -750,7 +761,9 @@ Jinja 是一個模板引擎
 
 原本 HTML 只能寫死
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <h1>Hello, Jerry</h1>
 ```
 
@@ -758,7 +771,9 @@ Jinja 是一個模板引擎
 
 我們可以在主頁加上
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <h1>Hello, {{ name }}</h1>
 ```
 
@@ -766,7 +781,9 @@ Jinja 是一個模板引擎
 
 修改一下主路由
 
-```bash
+**程式碼（Python）**
+
+```python
 @app.route("/")
 def home():
     return render_template("index.html", name="Jerry")
@@ -776,7 +793,9 @@ def home():
 
 也就是說
 
-```bash
+**流程／資料示意**
+
+```text
 Python 資料
    ↓
 Jinja 模板
@@ -792,7 +811,9 @@ Jinja 最常見的用途有三個
 
 例如使用者名稱、文章標題、商品價格
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
 <p>使用者名稱：{{ username }}</p>
 <p>文章標題：{{ item }}</p>
 <p>商品價格：{{ cost }}</p>
@@ -802,7 +823,9 @@ Jinja 最常見的用途有三個
 
 根據不同情況顯示不同內容
 
-```bash
+**程式碼（Jinja）**
+
+```jinja
 {% if is_login %}
     <p>歡迎回來</p>
 {% else %}
@@ -814,7 +837,9 @@ Jinja 最常見的用途有三個
 
 把一整串資料顯示在畫面上
 
-```bash
+**程式碼（Jinja）**
+
+```jinja
     <ul>
         {% for item in items %}
             <li>{{ item }}</li>
@@ -850,8 +875,6 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 使用者 → 拿到空 HTML → JavaScript → 動態生成畫面
 
-就不跟大家細聊語法這些的
-
 我們現在直接用 Jinjia 來幫我們做分頁跳轉的導覽行跟頁尾
 
 剛剛我們建立了多個路由
@@ -862,7 +885,9 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 在主頁 HTML 的  前段加上
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
     <nav>
         <a href="{{ url_for('home) }}">首頁</a>
         <a href="{{ url_for('html_tags') }}">HTML 展示</a>
@@ -875,11 +900,7 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 也就是你每次都要自己貼一次
 
-那如果今天老闆叫我們做店商平台
-
-面對成千上萬個產品頁面
-
-就算我們加班把 Ctrl C Ctrl V 按冒煙也改不完
+當電商平台有大量產品頁面時，逐頁複製導覽列會增加維護成本。
 
 所以我們要把頁面拆成三個部分
 
@@ -889,9 +910,13 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 以後修改一次前段或後段的修改就完成任務了
 
-所以我們新增一個 base.html
+> [!TIP]
+> **建立檔案：`templates/base.html`**
+> 在 `templates/` 資料夾新增 `base.html`，填入下方共用導覽列與內容區塊。
 
-```bash
+**程式碼（HTML / Jinja）**
+
+```html
     <nav>
         <a href="{{ url_for('home') }}">首頁</a>
         <a href="{{ url_for('html_tags') }}">HTML 展示</a>
@@ -904,27 +929,35 @@ HTML 一開始幾乎是空的東西送到用戶手上才由 JavaScript 負責產
 
 修改一下所有的 HTML 頁面
 
-格式如下
+格式如下：
 
+**程式碼（Jinja）：頁面繼承結構**
+
+```jinja
 {% extends "base.html" %}
 
 {% block content %}
-
-!原本的內容 自行修改!
-
+<!-- 放入原本頁面的內容 -->
 {% endblock %}
+```
 
-```bash
+**程式碼（Jinja）**
+
+```jinja
     {% extends "base.html" %}
 
     {% block content %}
 ```
 
-```bash
+**流程／資料示意**
+
+```text
 !原本的內容 自行修改!
 ```
 
-```bash
+**程式碼（Jinja）**
+
+```jinja
     {% endblock %}
 ```
 

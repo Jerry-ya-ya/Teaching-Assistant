@@ -1,14 +1,20 @@
 [回到Readme](/Readme.md)
 
+# 動態網路爬蟲
+
 ## 一般請求方法
 
 在導覽行新增跳轉連結
+
+**程式碼（HTML / Jinja）**
 
 ```html
 <a href="{{ url_for('quotes') }}">Quotes</a>
 ```
 
 在主程式新增一個新的路由
+
+**程式碼（Python）**
 
 ```python
 @app.route("/quotes")
@@ -33,6 +39,8 @@ def quotes():
 
 那上次使用的 BeautifulSoup 呢?
 
+**程式碼（Python）**
+
 ```python
 @app.route("/quotes")
 def quotes():
@@ -51,7 +59,7 @@ def quotes():
     return f"找到 {len(quotes)} 筆資料"
 ```
 
-找到 0 筆資料對吧
+預期結果為找到 0 筆資料。
 
 因為 BeautifulSoup 是用來做資料處理的
 
@@ -66,6 +74,8 @@ def quotes():
 在前面的範例中
 
 我們利用 requests 與 BeautifulSoup 嘗試從網站中取得名言資料
+
+**程式碼（Python）**
 
 ```python
 response = requests.get(url)
@@ -104,6 +114,8 @@ requests 真正取得的是什麼？
 
 當我們使用
 
+**程式碼（Python）**
+
 ```python
 response = requests.get(url)
 ```
@@ -115,6 +127,8 @@ response = requests.get(url)
 並取得伺服器最初回傳的 HTML
 
 流程如下：
+
+**流程／資料示意**
 
 ```text
 requests
@@ -138,6 +152,8 @@ HTML 原始碼
 - 顯示最終畫面
 
 流程如下：
+
+**流程／資料示意**
 
 ```text
 瀏覽器
@@ -163,6 +179,8 @@ HTML 原始碼
 
 例如：
 
+**流程／資料示意**
+
 ```text
 HTML 剛下載時
     ↓
@@ -180,6 +198,8 @@ JavaScript 執行
 我們遇到了什麼問題？
 
 在 quotes.toscrape.com/js 中：
+
+**流程／資料示意**
 
 ```text
 requests
@@ -208,10 +228,11 @@ BeautifulSoup 只能解析取得的 HTML
 - 執行 JavaScript
 - 等待資料載入
 
-
 這時候就需要使用 Selenium
 
 Selenium 會真正開啟瀏覽器：
+
+**流程／資料示意**
 
 ```text
 Selenium
@@ -257,6 +278,8 @@ Selenium 往往能取得 requests 無法取得的資料
 再一起傳送給瀏覽器。
 
 流程如下：
+**流程／資料示意**
+
 ```text
 瀏覽器
     ↓ Request
@@ -275,6 +298,8 @@ Flask 就是 SSR
 
 在 Flask 中，我們經常使用
 
+**程式碼（Python）**
+
 ```python
 return render_template(
     "index.html",
@@ -284,6 +309,8 @@ return render_template(
 
 其中
 
+**程式碼（Python）**
+
 ```python
 todos = Todo.query.all()
 ```
@@ -292,6 +319,8 @@ todos = Todo.query.all()
 
 接著
 
+**程式碼（Python）**
+
 ```python
 render_template()
 ```
@@ -299,6 +328,8 @@ render_template()
 會利用 Jinja 將資料填入 HTML
 
 例如：
+
+**程式碼（HTML / Jinja）**
 
 ```html
 <ul>
@@ -313,6 +344,8 @@ render_template()
 ```
 
 最終在伺服器端產生：
+
+**伺服器產生的 HTML 範例**
 
 ```html
 <ul>
@@ -331,6 +364,8 @@ render_template()
 因為資料已經存在於 HTML 裡面
 
 所以
+
+**程式碼（Python）**
 
 ```python
 response = requests.get(url)
@@ -352,6 +387,8 @@ response = requests.get(url)
 
 伺服器一開始回傳的內容可能只有：
 
+**程式碼（HTML / Jinja）**
+
 ```html
 <div id="app"></div>
 ```
@@ -359,6 +396,8 @@ response = requests.get(url)
 真正的資料會由 JavaScript 在瀏覽器中取得
 
 流程如下：
+
+**流程／資料示意**
 
 ```text
 瀏覽器
@@ -389,6 +428,8 @@ Vue
 
 例如：
 
+**程式碼（HTML / Jinja）**
+
 ```html
 <div id="app"></div>
 ```
@@ -398,6 +439,8 @@ Vue
 但其實資料並不在原始 HTML 裡
 
 而是在：
+
+**流程／資料示意**
 
 ```text
 JavaScript
@@ -413,17 +456,23 @@ API
 
 假設：
 
+**程式碼（Python）**
+
 ```python
 response = requests.get(url)
 ```
 
 取得的是
 
+**程式碼（HTML / Jinja）**
+
 ```html
 <div id="app"></div>
 ```
 
 那麼
+
+**程式碼（Python）**
 
 ```python
 BeautifulSoup(
@@ -444,7 +493,9 @@ BeautifulSoup(
 
 在前面的範例中：
 
-```url
+**瀏覽器網址**
+
+```text
 https://quotes.toscrape.com/js/
 ```
 
@@ -503,11 +554,11 @@ SSR 與 CSR 比較
 
 這也是許多初學者在學習網路爬蟲時經常遇到的問題
 
-
-
 方法一：先用 requests 嘗試
 
 最簡單的方法其實就是
+
+**程式碼（Python）**
 
 ```python
 response = requests.get(url)
@@ -524,6 +575,8 @@ print(response.text)
 
 這類網站通常可以使用
 
+**流程／資料示意**
+
 ```text
 requests
 +
@@ -539,6 +592,8 @@ BeautifulSoup
 開啟開發者工具（Developer Tools）
 
 如果在 HTML 中直接找到目標資料
+
+**程式碼（HTML / Jinja）**
 
 ```html
 <div class="quote">
@@ -579,6 +634,8 @@ api/products
 這是最常見的方法
 
 例如：
+**程式碼（Python）**
+
 ```python
 quotes = soup.select(".quote")
 
@@ -599,11 +656,15 @@ print(len(quotes))
 
 有些網站會出現
 
+**程式碼（HTML / Jinja）**
+
 ```html
 <div id="app"></div>
 ```
 
 或
+
+**程式碼（HTML / Jinja）**
 
 ```html
 <div id="root"></div>
@@ -627,11 +688,11 @@ print(len(quotes))
 
 此時大部分資料都會在 JavaScript 執行後才出現
 
-方法零：問問神奇海螺
-
 判斷流程建議
 
 在開始寫爬蟲之前，可以先依照以下流程判斷：
+**流程／資料示意**
+
 ```text
 requests
     ↓
@@ -692,6 +753,8 @@ Selenium 最初並不是為了網路爬蟲而設計
 
 當我們使用
 
+**程式碼（Python）**
+
 ```python
 requests.get(url)
 ```
@@ -701,6 +764,8 @@ requests.get(url)
 程式直接向網站取得 HTML
 
 流程如下：
+**流程／資料示意**
+
 ```text
 requests
     ↓
@@ -722,6 +787,8 @@ Selenium 會真正開啟瀏覽器
 然後模擬人類操作
 
 流程如下：
+**流程／資料示意**
+
 ```text
 Selenium
     ↓
@@ -812,6 +879,8 @@ Selenium 不是第一選擇
 
 在實務開發中，通常會依照以下順序嘗試：
 
+**流程／資料示意**
+
 ```text
 requests
     ↓
@@ -838,6 +907,8 @@ BeautifulSoup
 
 在 Dockerfile 新增
 
+**設定檔：`Dockerfile`（新增）**
+
 ```dockerfile
 RUN apt-get update && apt-get install -y \
     chromium \
@@ -857,6 +928,8 @@ RUN apt-get update && apt-get install -y \
 
 1. 更新套件清單
 
+**終端機指令（Bash）**
+
 ```bash
 apt-get update
 ```
@@ -867,11 +940,15 @@ apt-get update
 
 如果沒有這一步
 
+**終端機指令（Bash）**
+
 ```bash
 apt-get install chromium
 ```
 
 可能會出現
+
+**錯誤訊息範例**
 
 ```text
 Unable to locate package chromium
@@ -892,6 +969,8 @@ chromium-driver 提供 WebDriver
 
 關係如下：
 
+**流程／資料示意**
+
 ```text
 Selenium
     ↓
@@ -904,11 +983,15 @@ Chromium
 
 可能出現：
 
+**錯誤訊息範例**
+
 ```text
 selenium.common.exceptions.WebDriverException
 ```
 
 或：
+
+**錯誤訊息範例**
 
 ```text
 chromedriver executable needs to be in PATH
@@ -929,6 +1012,8 @@ libnss3 顧名思義
 - SSL/TLS 憑證驗證
 
 沒裝可能
+
+**錯誤訊息範例**
 
 ```text
 Failed to load NSS library
@@ -965,12 +1050,16 @@ Chromium 需要的核心圖形元件之一
 
 沒裝常看到
 
+**錯誤訊息範例**
+
 ```text
 error while loading shared libraries:
 libgtk-3.so.0
 ```
 
 4. 最後清理 apt 快取
+
+**終端機指令（Bash）**
 
 ```bash
 rm -rf /var/lib/apt/lists/*
@@ -980,6 +1069,8 @@ rm -rf /var/lib/apt/lists/*
 
 因為
 
+**終端機指令（Bash）**
+
 ```bash
 apt-get update
 ```
@@ -988,13 +1079,17 @@ apt-get update
 
 例如：
 
-```ubuntu
+**容器內的快取目錄**
+
+```text
 /var/lib/apt/lists/
 ```
 
 可能有數十 MB
 
 所以安裝完後
+
+**終端機指令（Bash）**
 
 ```bash
 rm -rf /var/lib/apt/lists/*
@@ -1006,11 +1101,15 @@ rm -rf /var/lib/apt/lists/*
 
 在 requirements.txt 新增套件
 
-```requirements
+**套件清單：`requirements.txt`（新增）**
+
+```text
 selenium
 ```
 
 在主程式上面引入套件
+
+**程式碼（Python）**
 
 ```python
 from selenium import webdriver
@@ -1019,6 +1118,8 @@ from selenium.webdriver.chrome.options import Options
 ```
 
 修改剛剛建立在主程式的爬蟲路由
+
+**程式碼（Python）**
 
 ```python
 @app.route("/quotes")
@@ -1063,6 +1164,8 @@ def quotes():
 
 修改路由處裡邏輯
 
+**程式碼（Python）**
+
 ```python
 quote_elements = driver.find_elements(
             By.CLASS_NAME,
@@ -1091,6 +1194,8 @@ quote_elements = driver.find_elements(
 
 路由尾部回傳 HTML
 
+**程式碼（Python）**
+
 ```python
 return render_template(
         "quotes.html",
@@ -1098,7 +1203,11 @@ return render_template(
     )
 ```
 
-新增要回傳的 HTML 命名為 quotes.html
+> [!TIP]
+> **建立檔案：`templates/quotes.html`**
+> 在 `templates/` 資料夾新增 `quotes.html`，填入下方名言頁面，供 `/quotes` 路由使用。
+
+**程式碼（HTML / Jinja）**
 
 ```html
 <!DOCTYPE html>
@@ -1153,6 +1262,8 @@ return render_template(
 
 這樣跳轉到名言頁面就不會每次都要重新爬蟲
 
+**程式碼（Python）**
+
 ```python
 @app.route("/crawl")
 def crawl_quotes():
@@ -1160,7 +1271,13 @@ def crawl_quotes():
 
 把剛剛名言路由的爬蟲邏輯搬到這個路由下面
 
+> [!CAUTION]
+> **重建名言資料**
+> 下方 `Quote.query.delete()` 會刪除名言資料表中的既有紀錄。此範例以清空後重新爬取的方式更新資料，請先確認舊資料可被取代。
+
 將原本定義 list 的地方改成
+
+**程式碼（Python）**
 
 ```python
 Quote.query.delete()
@@ -1169,6 +1286,8 @@ Quote.query.delete()
 爬蟲邏輯尾部的 return 部分拉回名言頁面路由
 
 並且在名言路由回傳 HTML 前查詢資料庫的名言資料表
+
+**程式碼（Python）**
 
 ```python
 quote = Quote.query.all()
@@ -1179,6 +1298,8 @@ quote = Quote.query.all()
 這次改動的目的就是將爬到的資訊可以存進資料庫
 
 所以在爬蟲邏輯的退出瀏覽器前填上
+
+**程式碼（Python）**
 
 ```python
             db.session.add(
@@ -1193,6 +1314,8 @@ quote = Quote.query.all()
 
 最後爬蟲邏輯回傳
 
+**程式碼（Python）**
+
 ```python
 return "Crawl Success!"
 ```
@@ -1200,6 +1323,8 @@ return "Crawl Success!"
 因為我們把爬蟲跟顯示頁面分開了
 
 現在我們在顯示頁面要加一個按鈕用來啟動爬蟲
+
+**程式碼（HTML / Jinja）**
 
 ```html
 <form action="/crawl" method="GET">

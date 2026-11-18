@@ -1,56 +1,8 @@
 [回到Readme](/Readme.md)
 
-利用 Flask 當後端開發了一段時間
+# API 設計與後端服務分層
 
-測試前端功能的時候我會看 Docker 後端的 log
-
-發現一個前端按鈕可能會用到好幾個api
-
-所以我想到有關結構性的問題
-
-我應不應該把它們切分得更細
-
-把常用的切分出來?
-
-還是就這樣就好?
-
-畢竟每一次的 Query 、 log 的儲存
-
-都會提高對網站長期運營的壓力
-
-如果只有少數人會訪問也許不是問題
-
-但是網站的程式越變越大
-
-之後要改可能會很吃力
-
-如果一直放任這個結構問題不管
-
-讓程式沒有經過良好規劃
-
-只要有新需求就隨便在原本的架構上往上加蓋
-
-導致最後結構脆弱、隨時會塌
-
-改一個地方就全部壞掉
-
-所以很多工程師都笑說可以動就不要去管它怎麼動起來的
-
-甚至還有一個bug是bug，兩個bug是work
-
-這些後果就是 Spaghetti code 造成的
-
-也就是你的程式變成一個大雜燴
-
-你已經分不清哪個地方會影響到哪一個功能
-
-很多程式或遊戲就是因為這個原因所以乾脆整個打掉重做比較快
-
-因為重構（Refactoring） 很累人
-
-也會讓人感到無比的煩躁
-
-這一坨大雜燴更是讓成本直線上升
+一個前端按鈕可能呼叫多支 API。設計時需要考慮業務邊界、資料一致性、查詢成本與長期維護性，避免功能不斷增加後形成難以追蹤相依關係的 Spaghetti code。
 
 那我們應該怎麼設計 api?
 
@@ -72,6 +24,8 @@
 
 前端依序做
 
+**流程／資料示意**
+
 ```text
 1. 建立專案
 2. 建立預設 Todo
@@ -82,7 +36,9 @@
 
 如果前端自己連續呼叫五支 API：
 
-```text
+**程式碼（JavaScript）**
+
+```javascript
 createProject()
 createDefaultTodo()
 updatePoints()
@@ -91,6 +47,8 @@ createActivityLog()
 ```
 
 這種設計容易出現
+
+**流程／資料示意**
 
 ```text
 專案建立成功
@@ -105,11 +63,15 @@ Todo 建立成功
 
 而是應該提供一支代表完整業務行為的 API
 
+**流程／資料示意**
+
 ```text
 POST /api/projects
 ```
 
 由後端內部處理
+
+**流程／資料示意**
 
 ```text
 建立專案
@@ -134,6 +96,8 @@ POST /api/projects
 
 例如：
 
+**流程／資料示意**
+
 ```text
 POST /api/project-recruitments
 POST /api/friend-requests/{id}/accept
@@ -149,6 +113,8 @@ POST /api/users/register
 例如接受好友邀請
 
 後端可以一次處理：
+
+**流程／資料示意**
 
 ```text
 邀請狀態改為 accepted
@@ -172,6 +138,8 @@ POST /api/users/register
 
 可以分成：
 
+**流程／資料示意**
+
 ```text
 GET /api/users/me
 GET /api/users/me/posts
@@ -180,6 +148,8 @@ GET /api/users/me/activities
 ```
 
 原因是：
+
+**流程／資料示意**
 
 ```text
 有些區塊可能不需要顯示
@@ -190,9 +160,7 @@ GET /api/users/me/activities
 手機版與桌面版可能需要不同資料
 ```
 
-我在前面提到
-
-是不是應該把常用的切分出來？
+常用操作是否應該抽出共用邏輯？
 
 「常用」比較適合用來決定前端 Service 的封裝
 
@@ -202,11 +170,15 @@ GET /api/users/me/activities
 
 例如很多元件都會取得登入使用者
 
-```text
+**程式碼（JavaScript）**
+
+```javascript
 getCurrentUser()
 ```
 
 可以放到
+
+**流程／資料示意**
 
 ```text
 core/services/auth.service.ts
@@ -214,17 +186,23 @@ core/services/auth.service.ts
 
 而好友相關的 API
 
+**流程／資料示意**
+
 ```text
 features/friend/services/friend.service.ts
 ```
 
 專案相關的 API
 
+**流程／資料示意**
+
 ```text
 features/project/services/project.service.ts
 ```
 
 也就是
+
+**流程／資料示意**
 
 ```text
 後端 API：按照資源與業務行為設計
@@ -233,13 +211,17 @@ features/project/services/project.service.ts
 
 不要做成一個超大的
 
+**流程／資料示意**
+
 ```text
 api.service.ts
 ```
 
 裡面放
 
-```text
+**程式碼（JavaScript）**
+
+```javascript
 login()
 getProfile()
 createPost()
@@ -252,7 +234,9 @@ runCrawler()
 
 Component 裡不要直接堆很多 HttpClient
 
-```text
+**程式碼（TypeScript）**
+
+```typescript
 this.http.post(...)
 this.http.patch(...)
 this.http.get(...)
@@ -260,7 +244,9 @@ this.http.get(...)
 
 而是呼叫有業務意義的方法
 
-```text
+**程式碼（TypeScript）**
+
+```typescript
 this.projectService.publishRecruitment(form);
 ```
 
@@ -283,6 +269,8 @@ Component 也不應知道細節
 
 你的按鈕如果屬於
 
+**流程／資料示意**
+
 ```text
 發布專案招募
 接受好友邀請
@@ -295,6 +283,8 @@ Component 也不應知道細節
 
 如果只是
 
+**流程／資料示意**
+
 ```text
 打開個人頁面
 顯示 Dashboard
@@ -305,7 +295,9 @@ Component 也不應知道細節
 
 前端平行取得即可
 
-最重要的原則是
+> [!IMPORTANT]
+> **API 的責任邊界**
+> 前端負責觸發使用者意圖；後端負責驗證權限、維持資料一致性與完成業務流程。
 
 前端負責觸發意圖
 
@@ -327,6 +319,8 @@ Component 也不應知道細節
 
 假設使用者進入個人頁面，需要顯示：
 
+**流程／資料示意**
+
 ```text
 基本資料
 頭像
@@ -337,6 +331,8 @@ Component 也不應知道細節
 
 這些資料彼此相對獨立，可以分開取得：
 
+**流程／資料示意**
+
 ```text
 GET /api/me
 GET /api/users/me/posts
@@ -345,6 +341,8 @@ GET /api/notifications/unread-count
 ```
 
 這樣的好處是：
+
+**流程／資料示意**
 
 ```text
 每個區塊可以獨立載入
@@ -362,6 +360,8 @@ GET /api/notifications/unread-count
 
 例如「發布專案招募」按鈕需要：
 
+**流程／資料示意**
+
 ```text
 建立專案
 建立招募文章
@@ -371,6 +371,8 @@ GET /api/notifications/unread-count
 ```
 
 前端若依序呼叫：
+
+**流程／資料示意**
 
 ```text
 POST /projects
@@ -386,6 +388,8 @@ POST /notifications
 
 第三支失敗，系統可能變成：
 
+**流程／資料示意**
+
 ```text
 專案已建立
 招募文已建立
@@ -397,11 +401,15 @@ POST /notifications
 
 這種情況比較適合讓前端只呼叫一支用途明確的 API：
 
+**流程／資料示意**
+
 ```text
 POST /api/project-recruitments
 ```
 
 由後端在同一個服務流程中完成：
+
+**流程／資料示意**
 
 ```text
 驗證權限
@@ -423,7 +431,9 @@ API 是提供給客戶端使用的介面
 
 例如：
 
-```text
+**程式碼（JavaScript）**
+
+```javascript
 calculateReward()
 createAuditLog()
 validateProjectOwner()
@@ -432,6 +442,8 @@ sendNotification()
 
 這些可以只是後端內部的 service function，不必全部變成：
 
+**流程／資料示意**
+
 ```text
 POST /api/calculate-reward
 POST /api/create-audit-log
@@ -439,6 +451,8 @@ POST /api/validate-owner
 ```
 
 否則前端會承擔太多業務流程，也會增加：
+
+**流程／資料示意**
 
 ```text
 權限繞過風險
@@ -453,6 +467,8 @@ API 維護成本
 
 假設前端只需要：
 
+**程式碼（JSON）**
+
 ```json
 {
   "id": 12,
@@ -462,6 +478,8 @@ API 維護成本
 ```
 
 後端卻回傳：
+
+**程式碼（JSON）**
 
 ```json
 {
@@ -485,6 +503,8 @@ API 維護成本
 
 使用者仍然能在：
 
+**流程／資料示意**
+
 ```text
 F12 → Network → Response
 ```
@@ -495,7 +515,9 @@ F12 → Network → Response
 
 例如：
 
-```
+**程式碼（TypeScript）**
+
+```typescript
 interface PublicUserResponse {
   id: number;
   nickname: string;
@@ -506,6 +528,8 @@ interface PublicUserResponse {
 而不是把整個資料庫模型直接序列化回傳
 
 不必要資料的主要問題
+
+**流程／資料示意**
 
 ```text
 資安：敏感欄位可能被暴露
@@ -529,6 +553,8 @@ interface PublicUserResponse {
 
 切得過細會產生所謂的 Chatty API：
 
+**流程／資料示意**
+
 ```text
 取得使用者名稱
 取得頭像
@@ -539,6 +565,8 @@ interface PublicUserResponse {
 ```
 
 如果一個頁面需要發出二十支請求，可能造成：
+
+**流程／資料示意**
 
 ```text
 網路往返時間增加
@@ -551,11 +579,15 @@ Loading 狀態複雜
 
 因此可以提供一個針對頁面或使用情境設計的聚合 API：
 
+**流程／資料示意**
+
 ```text
 GET /api/profile-overview
 ```
 
 回傳：
+**程式碼（JSON）**
+
 ```json
 {
   "profile": {
@@ -576,6 +608,8 @@ GET /api/profile-overview
 
 這種 API 有時稱為：
 
+**流程／資料示意**
+
 ```text
 Composite API
 Aggregation API
@@ -593,6 +627,8 @@ View Model API
 
 當這些操作：
 
+**流程／資料示意**
+
 ```text
 共同構成一個使用者動作
 必須全部成功或全部失敗
@@ -603,6 +639,8 @@ View Model API
 ```
 
 例如：
+
+**流程／資料示意**
 
 ```text
 POST /api/project-recruitments
@@ -621,6 +659,8 @@ POST /api/posts/{id}/publish
 
 當資料或操作：
 
+**流程／資料示意**
+
 ```text
 可以獨立存在
 更新頻率不同
@@ -632,6 +672,8 @@ POST /api/posts/{id}/publish
 
 例如：
 
+**流程／資料示意**
+
 ```text
 GET /api/users/{id}
 GET /api/users/{id}/posts
@@ -639,7 +681,9 @@ GET /api/users/{id}/projects
 GET /api/users/{id}/friends
 ```
 
-我建議 API 分成三個層次
+API 可分成三個層次
+
+**流程／資料示意**
 
 ```text
 Controller / Route
@@ -651,11 +695,15 @@ Repository / Database
 
 例如前端：
 
+**流程／資料示意**
+
 ```text
 POST /api/project-recruitments
 ```
 
 Controller 負責：
+
+**流程／資料示意**
 
 ```text
 解析請求
@@ -665,6 +713,8 @@ Controller 負責：
 ```
 
 Application Service 負責：
+
+**流程／資料示意**
 
 ```text
 驗證業務規則
@@ -676,6 +726,8 @@ Application Service 負責：
 ```
 
 Repository 負責：
+
+**流程／資料示意**
 
 ```text
 查詢與寫入資料庫
@@ -691,6 +743,8 @@ Repository 負責：
 
 設計 API 時可以問：
 
+**流程／資料示意**
+
 ```text
 前端是在要求一份資料
 還是在表達一個業務意圖？
@@ -698,11 +752,15 @@ Repository 負責：
 
 要求資料：
 
+**流程／資料示意**
+
 ```text
 GET /api/users/12/posts
 ```
 
 表達業務意圖：
+
+**流程／資料示意**
 
 ```text
 POST /api/friend-requests/45/accept
@@ -714,7 +772,7 @@ POST /api/tasks/20/complete
 
 而不是讓前端自己拼湊後端流程
 
-所以最終答案是
+設計原則
 
 不是每個按鈕固定對應一支 API
 

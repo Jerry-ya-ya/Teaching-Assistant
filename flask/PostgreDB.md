@@ -1,5 +1,7 @@
 [回到Readme](/Readme.md)
 
+# PostgreSQL 與 pgAdmin
+
 市面上常見的資料庫主要分為兩大陣營
 
 關聯式資料庫 (SQL) 與 非關聯式資料庫 (NoSQL)
@@ -173,14 +175,18 @@ Internal Database URL 是給 Render 內部連線的
 
 .env & .env.example 修改
 
-```bash
+**設定檔：`.env` 與 `.env.example`（範本僅保留占位值）**
+
+```dotenv
 # External Database URL / Internal Database URL
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
 ```
 
 requirements.txt 新增一個套件
 
-```bash
+**套件清單：`requirements.txt`（新增）**
+
+```text
 psycopg2-binary
 ```
 
@@ -196,9 +202,11 @@ psycopg2 是 Python 連線 PostgreSQL 的驅動程式
 
 如果可以我們來幫它新增一點功能
 
-app.py 新增刪除 API 路由
+在 `app.py` 新增更新待辦事項的 API 路由
 
-```bash
+**程式碼（Python）**
+
+```python
 @app.route("/update/<int:id>", methods=["POST"])
 def update_todo(id):
 
@@ -217,7 +225,9 @@ def update_todo(id):
     return redirect("/todo")
 ```
 
-```bash
+**程式碼：`templates/todo.html`（更新表單）**
+
+```jinja
 {% for todo in todos %}
 
                 <li>
@@ -275,15 +285,19 @@ https://www.pgadmin.org
 
 現在我們要把剛剛的 External Database URL 拆解成多個部分再輸入到 pdAdmin
 
-下面是我剛剛貼上的 External Database URL
+以下使用占位值示範 External Database URL 的結構
 
-```bash
-postgresql://jerry:mABi4NUq18w9PGJtGFx5huiVbt5JJ2NM@dpg-d860ng1kh4rs73cdss6g-a.singapore-postgres.render.com/jerry_1234_eug3
+**資料庫連線字串範例（占位值）**
+
+```text
+postgresql://USER:PASSWORD@HOST:5432/DATABASE
 ```
 
 剛剛我們在修改 .env.example 的時候有寫到
 
-```bash
+**資料庫連線格式**
+
+```text
 postgresql://USER:PASSWORD@HOST:PORT/DATABASE
 ```
 
@@ -302,29 +316,29 @@ postgresql://USER:PASSWORD@HOST:PORT/DATABASE
 
 現在切分剛剛拿到的 External Database URL
 
-```bash
+**連線字串拆解（占位值）**
+
+```text
 postgresql://
 
-jerry
+USER
 
 :
 
-mABi4NUq18w9PGJtGFx5huiVbt5JJ2NM
+PASSWORD
 
 @
 
-dpg-d860ng1kh4rs73cdss6g-a.singapore-postgres.render.com
+HOST:5432
 
 /
 
-jerry_1234_eug3
+DATABASE
 ```
 
-這邊把密碼放上來是因為這個資料庫三天就會自己消失
-
-而且密碼是 Render 隨機生成的
-
-千萬不要把密碼放到公開的地方
+> [!WARNING]
+> **保護資料庫連線資訊**
+> 範例中的 `USER`、`PASSWORD`、`HOST` 與 `DATABASE` 都是占位值。真實連線字串只填入本地 `.env` 或部署平台的環境變數，請勿寫入公開教材或 `.env.example`。
 
 切好了之後一一對照填到 pdAdmin 裡面的連線設定
 
@@ -336,7 +350,7 @@ jerry_1234_eug3
 
 填好了之後就可以開始查表了
 
-剛剛連上線的是 Render_Jerry 資料庫
+選擇剛剛在 pgAdmin 註冊的資料庫連線
 
 所以把它展開
 

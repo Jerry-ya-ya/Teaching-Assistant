@@ -202,7 +202,9 @@ Docker 將無法正常運作
 
 在安裝之前先檢查一下裝置是否已經安裝過了
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 wsl --version
 ```
 
@@ -222,7 +224,9 @@ wsl --version
 
 我們輸入下面的指令來安裝 wsl
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 wsl --install
 ```
 
@@ -236,8 +240,9 @@ wsl --install
 
 重新開機完之後我們再一次檢查一下有沒有安裝成功
 
+**終端機指令（PowerShell）**
 
-```bash
+```powershell
 wsl --version
 ```
 
@@ -245,13 +250,17 @@ wsl --version
 
 接著查看目前的 Linux 發行版
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 wsl -l -v
 ```
 
 可能會看到
 
-```bash
+**預期輸出**
+
+```text
 NAME      STATE           VERSION
 Ubuntu    Running         2
 ```
@@ -262,13 +271,17 @@ Ubuntu    Running         2
 
 可以升級成 WSL2
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 wsl --set-version Ubuntu 2
 ```
 
 設定預設使用 WSL2
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 wsl --set-default-version 2
 ```
 
@@ -278,17 +291,23 @@ wsl --set-default-version 2
 
 接下來檢查一下 Docker 是否有安裝成功
 
+**終端機指令（Bash）**
+
 ```bash
 docker --version
 ```
 
 如果安裝成功，會看到類似：
 
-```bash
+**預期輸出**
+
+```text
 Docker version 29.X.X, build aXcXX9X
 ```
 
 再檢查 Docker Compose：
+
+**終端機指令（Bash）**
 
 ```bash
 docker compose version
@@ -296,7 +315,9 @@ docker compose version
 
 如果安裝成功應該會看到類似：
 
-```bash
+**預期輸出**
+
+```text
 Docker Compose version v5.X.X
 ```
 
@@ -322,13 +343,17 @@ Docker Compose version v5.X.X
 
 我們還可以藉由指令來檢查 Docker 是不是有正常在運作
 
+**終端機指令（Bash）**
+
 ```bash
 docker ps
 ```
 
 正常應該會看到類似：
 
-```bash
+**預期輸出**
+
+```text
 CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 ```
 
@@ -340,7 +365,9 @@ CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 
 如果出現類似這種訊息：
 
-```bash
+**錯誤訊息範例**
+
+```text
 Cannot connect to the Docker daemon
 ```
 
@@ -488,11 +515,13 @@ Dockerfile 是建造房車的說明書
 
 現在建立最小 Flask App
 
-建立一個檔案，命名為 app.py
+> [!TIP]
+> **建立檔案：`app.py`**
+> 在 `flask-docker/` 專案根目錄新增 `app.py`，貼上下方 Python 程式碼並存檔。
 
-內容如下：
+**程式碼（Python）**
 
-```bash
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -505,13 +534,13 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 ```
 
-建立 requirements.txt
+> [!TIP]
+> **建立檔案：`requirements.txt`**
+> 在專案根目錄新增 `requirements.txt`，填入下方套件清單。
 
-在資料夾建立 requirements.txt
+**套件清單：`requirements.txt`**
 
-內容如下：
-
-```bash
+```text
 flask
 ```
 
@@ -519,13 +548,13 @@ flask
 
 這個 Flask 專案需要安裝哪些 Python 套件
 
-再來建立一個檔案
+> [!TIP]
+> **建立檔案：`Dockerfile`**
+> 在專案根目錄新增 `Dockerfile`（沒有副檔名），填入下方建構設定。
 
-名稱一定要叫 Dockerfile
+**設定檔：`Dockerfile`**
 
-內容如下：
-
-```bash
+```dockerfile
 # 以 Python 3.11 的輕量版映像檔作為基底
 FROM python:3.11-slim
 
@@ -550,11 +579,15 @@ CMD ["python", "app.py"]
 
 在專案目錄下輸入
 
+**終端機指令（Bash）**
+
 ```bash
 docker build -t flask .
 ```
 
 建立後輸入以下指令檢查一下是否檢查成功
+
+**終端機指令（Bash）**
 
 ```bash
 docker images
@@ -563,6 +596,8 @@ docker images
 應該會看到 flask 出現在列表中
 
 建立好之後就是啟動了
+
+**終端機指令（Bash）**
 
 ```bash
 docker run -d -p 5000:5000 --name flask-container flask
@@ -580,13 +615,17 @@ docker run -d -p 5000:5000 --name flask-container flask
 
 打開瀏覽器輸入
 
-```bash
+**瀏覽器網址**
+
+```text
 http://localhost:5000
 ```
 
 如果成功就會看到
 
-```bash
+**預期畫面文字**
+
+```text
 Hello, Docker Flask!
 ```
 
@@ -594,11 +633,13 @@ Hello, Docker Flask!
 
 我們就需要把 Docker 對外對內的設定都預先寫好
 
-建立一個叫做 docker-compose.yml 的檔案
+> [!TIP]
+> **建立檔案：`docker-compose.yml`**
+> 在專案根目錄新增 `docker-compose.yml`，填入下方容器設定。
 
-裡面我們放上需要的設定
+**設定檔：`docker-compose.yml`**
 
-```bash
+```yaml
 services:
   flask-mvp:
     build: .
@@ -625,11 +666,15 @@ services:
 
 查看全部容器（包含已停止）
 
+**終端機指令（Bash）**
+
 ```bash
 docker ps -a
 ```
 
 暫停 / 停止容器
+
+**終端機指令（Bash）**
 
 ```bash
 docker stop <container_name 或 container_id>
@@ -637,17 +682,25 @@ docker stop <container_name 或 container_id>
 
 刪除單一容器
 
+**終端機指令（Bash）**
+
 ```bash
 docker rm <container_name>
 ```
 
 強制刪除（如果還在跑）
 
+**終端機指令（Bash）**
+
 ```bash
 docker rm -f <container_name>
 ```
 
-一鍵刪除所有容器
+> [!CAUTION]
+> **刪除所有容器**
+> 以下指令會強制移除目前 Docker 環境中的所有容器，包含其他專案的容器。請先確認可刪除的範圍，再執行。
+
+**終端機指令（Bash）**
 
 ```bash
 docker rm -f $(docker ps -aq)

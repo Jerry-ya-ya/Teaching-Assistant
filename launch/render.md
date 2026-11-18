@@ -58,15 +58,7 @@ V --> W --> X
 
 ## 因應 Docker 無法使用補充本地化虛擬環境
 
-上週因為無法使用 Docker 導致上沒一半就下課了
-
-助教很對不起大家
-
-在這裡說一聲抱歉
-
-藉由這次機會
-
-我們來體驗一下沒有 Docker 我們該怎麼在處理環境上減少時間的花費
+無法使用 Docker 時，可以改用 Python 虛擬環境，隔離各專案的套件與版本。
 
 如果我們直接在電腦上安裝套件
 
@@ -94,6 +86,8 @@ V --> W --> X
 
 要使用 Python 原生的虛擬環境前先檢查一下 Python
 
+**終端機指令（Bash）**
+
 ```bash
 python3 --version
 ```
@@ -101,6 +95,8 @@ python3 --version
 再來我們就可以建立虛擬環境
 
 在專案根目錄
+
+**終端機指令（Bash）**
 
 ```bash
 python -m venv venv
@@ -120,11 +116,15 @@ venv 會根據你的系統而有所不同
 
 Windows（PowerShell）
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 venv\Scripts\Activate
 ```
 
 Mac / Linux
+
+**終端機指令（Bash）**
 
 ```bash
 source venv/bin/activate
@@ -138,11 +138,15 @@ source venv/bin/activate
 
 Windows（PowerShell）
 
-```bash
+**終端機指令（PowerShell）**
+
+```powershell
 where python
 ```
 
 Mac / Linux
+
+**終端機指令（Bash）**
 
 ```bash
 which python
@@ -160,6 +164,8 @@ which python
 
 就不用我們手動一個一個慢慢安裝
 
+**終端機指令（Bash）**
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -167,6 +173,8 @@ pip install -r requirements.txt
 等 pip 幫我們把清單裡面的東西都安裝好了之後
 
 我們檢查一下他有沒有遺漏東西
+
+**終端機指令（Bash）**
 
 ```bash
 pip list
@@ -180,6 +188,8 @@ pip list
 
 如果要離開我們的虛擬環境
 
+**終端機指令（Bash）**
+
 ```bash
 deactivate
 ```
@@ -187,6 +197,8 @@ deactivate
 你會看到 (venv) 消失
 
 關掉之後我們可以看一下成果
+
+**終端機指令（Bash）**
 
 ```bash
 pip list
@@ -204,7 +216,17 @@ pip list
 
 我們為了避免它上傳到 Github
 
-我們在根目錄建立一個 .gitignore 檔案
+> [!TIP]
+> **建立檔案：`.gitignore`**
+> 在專案根目錄新增 `.gitignore`（若已存在則編輯原檔），填入下方忽略清單。
+
+**忽略清單：`.gitignore`**
+
+```gitignore
+venv/
+__pycache__/
+.env
+```
 
 目的是讓 Git 忽略裡面列出的檔案
 
@@ -213,10 +235,6 @@ pip list
 有些是為了讓檔案不要那麼大
 
 但大部分是為了不要把隱私暴露出去
-
-這也是我們 Github 上課的時候沒有上到的內容
-
-但是是很重要的部分
 
 ## 網站託管前的知識補充
 
@@ -288,9 +306,7 @@ pip list
 
 像我們上一次上課就是教大家如何把自己的 Flask 藉由 Docker 將我們寫好的程式容器化
 
-我們這學期的目標就是這個
-
-教大家使用容器託管的方式把程式公開給全世界的人使用
+本課將使用容器託管的方式，讓程式可透過公網存取。
 
 容器託管的難度比較高
 
@@ -300,39 +316,7 @@ pip list
 
 容器託管也是業界普遍使用的方式
 
-我相信大家都很有慧根
-
-只要有心
-
-花一點時間一定可以學會
-
-由於我們是初學者
-
-一開始不要使用太過複雜
-
-介面按鈕多得像廣告裡面爛大街手遊的託管平台（Azure）
-
-那種託管平台雖然功能很多很強
-
-但是太多太雜了
-
-就連我都迷路在裡面一個禮拜才把網站託管上去
-
-而且 Azure 雖然有學生免費額度
-
-但是忘記關掉會不小心用掉蠻多額度的
-
-也許這學期有機會讓大家以補充的形式看到或是操作到
-
-為了讓大家以最快的速度看到成果
-
-杰克幫大家找好了免費的託管平台
-
-雖然只能託管一個容器
-
-每次開啟網站也要等一段時間
-
-但是也非常夠用了
+本課使用 Render 示範容器託管的設定與部署流程。
 
 ## 透過 Render.com 部屬網站
 
@@ -345,8 +329,6 @@ https://render.com
 點擊右上角的 Sign In 進入註冊的頁面
 
 ![註冊頁面](../img/Render/sign_in.png)
-
-想必大家都有 Github 我就沒有嘗試其他登入方式
 
 點選最左邊的 Github 登入方式
 
@@ -404,9 +386,7 @@ https://render.com
 
 請幫你的服務命名一個能分辨出來裡面功能的名字
 
-像我這邊只發佈前端
-
-所以加了一個 Frontend
+例如只發佈前端服務時，可在名稱中加入 Frontend。
 
 ![服務命名](../img/Render/service_name.png)
 
@@ -418,9 +398,7 @@ https://render.com
 
 分支可以依照你的 repo 分支來選擇
 
-像我的專案有 Java 板跟 Python 版
-
-這邊因為沒有用到後端所以選哪個都不影響
+請選擇包含這次部署內容的分支。
 
 當然如果 main / master 分支是最新的也可以選擇它
 
@@ -432,7 +410,7 @@ https://render.com
 
 如果語言選擇 Docker 就需要幫容器找到 Dockerfile
 
-像我的專案是前後端分離的
+若專案採前後端分離
 
 所以會有兩個 Dockerfile
 
@@ -490,7 +468,7 @@ Render 就會開始工作了
 
 ## Gunicorn
 
-剛剛的上傳完畢之後打開網頁發現部屬失敗了對吧
+若上傳後仍無法透過公開網址開啟網站，可檢查服務的監聽位址與埠號。
 
 如果你仔細觀察 Render 裡面容器的終端機你會發現
 
@@ -566,7 +544,9 @@ Gunicorn 是「讓 Flask 在正式環境中運作」的工具
 
 應該會看到 
 
-```bash
+**預期部署事件**
+
+```text
 Deploy started for XXXXXXX: Added a ...
 New commit via Auto-Deploy
 ```
@@ -585,14 +565,6 @@ Render 都會自動幫你把最新的版本更新上去
 
 不妨用手機或者其他裝置看看是否也可以連接上去
 
-到這邊大家對於將一個網站架設到公網已經有一定的概念
-
-希望各位有收穫了一點成就感
-
-我知道這些都不容易
-
-過程中很多步驟有點繁瑣跟障礙
-
-很感謝不管是為了自己還是期末作品而來上助教課的大家
+完成後，即可透過公開網址測試部署成果與自動更新流程。
 
 [回到Readme](/Readme.md)

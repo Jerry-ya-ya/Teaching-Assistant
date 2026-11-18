@@ -1,4 +1,7 @@
 [回到Readme](/Readme.md)
+
+# SQLite 與環境變數
+
 到目前為止
 
 我們已經可以
@@ -33,18 +36,20 @@ SQLite 是一種輕量級資料庫
 
 新增兩個套件
 
-```bash
+**套件清單：`requirements.txt`（新增）**
+
+```text
 python-dotenv
 Flask-SQLAlchemy
 ```
 
-建立一個叫 .env 的檔案
+> [!TIP]
+> **建立檔案：`.env`**
+> 在專案根目錄新增 `.env`（檔名前有一個點），填入下方設定。實際密鑰應由自己設定。
 
-請注意前面有一個點
+**設定檔：`.env`**
 
-在裡面貼上
-
-```bash
+```dotenv
 SECRET_KEY=your_secret_key
 DATABASE_URL=sqlite:///todo.db
 ```
@@ -53,8 +58,10 @@ DATABASE_URL=sqlite:///todo.db
 
 如果我們把設定直接寫死
 
-```bash
-app.config["SECRET"] = "LH102 冷氣斷電根本是酷刑"
+**反例：將密鑰寫死在程式中**
+
+```python
+app.config["SECRET"] = "example-secret-key"
 ```
 
 會有幾個問題
@@ -64,11 +71,13 @@ app.config["SECRET"] = "LH102 冷氣斷電根本是酷刑"
 
 所以實務上會把設定放進 .env
 
-現在建立一個 .env.example
+> [!TIP]
+> **建立檔案：`.env.example`**
+> 在專案根目錄新增 `.env.example`，填入下方範例設定，供其他開發者參考。只保留占位值。
 
-在裡面貼上
+**設定範本：`.env.example`**
 
-```bash
+```dotenv
 SECRET_KEY=your_secret_key
 DATABASE_URL=sqlite:///todo.db
 ```
@@ -77,11 +86,9 @@ DATABASE_URL=sqlite:///todo.db
 
 這是因為 .env 裡面是你們要自己去改的
 
-當然
-
-不改也可以
-
-但是正式環境下會把他們改掉然後只有你自己知道
+> [!WARNING]
+> **正式環境設定**
+> 正式環境必須替換範例密鑰，並透過受控的環境變數或秘密管理機制提供設定。
 
 可以想成是你的鑰匙串
 
@@ -97,9 +104,13 @@ DATABASE_URL=sqlite:///todo.db
 
 不然跟把自己家的鑰匙丟到大街上沒兩樣
 
-現在在 .gitignore 新增三個要忽略的東西
+> [!IMPORTANT]
+> **修改 `.gitignore`**
+> 將下方三項加入專案根目錄的 `.gitignore`，避免提交真實環境設定與本地資料庫。
 
-```bash
+**忽略清單：`.gitignore`（新增）**
+
+```gitignore
 .env
 instance/
 *.db
@@ -117,7 +128,9 @@ instance/
 
 在 app.py 修改
 
-```bash
+**程式碼（Python）**
+
+```python
 import os
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -126,13 +139,17 @@ from dotenv import load_dotenv
 
 app 上新增
 
-```bash
+**程式碼（Python）**
+
+```python
 load_dotenv()
 ```
 
 app 下新增
 
-```bash
+**程式碼（Python）**
+
+```python
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 
@@ -145,7 +162,9 @@ db = SQLAlchemy(app)
 
 在定義資料庫後面新增
 
-```bash
+**程式碼（Python）**
+
+```python
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -159,7 +178,9 @@ class Todo(db.Model):
 
 create_all() 會根據 Model 自動建立資料表
 
-```bash
+**程式碼（Python）**
+
+```python
 with app.app_context():
     db.create_all()
 ```
@@ -202,7 +223,9 @@ CRUD 分別是
 
 在主路由下面新增一個新的路由
 
-```bash
+**程式碼（Python）**
+
+```python
 @app.route("/todo")
 def todo():
 
@@ -216,7 +239,9 @@ def todo():
 
 在下面建立一個可以被用的 API
 
-```bash
+**程式碼（Python）**
+
+```python
 @app.route("/add", methods=["POST"])
 def add_todo():
 
@@ -235,11 +260,13 @@ def add_todo():
 
 接著
 
-在主路由建立一個 todo.html
+> [!TIP]
+> **建立檔案：`templates/todo.html`**
+> 在 `templates/` 資料夾新增 `todo.html`，填入下方待辦事項頁面，供 `/todo` 路由使用。
 
-放入下面提供的標籤
+**程式碼（HTML / Jinja）**
 
-```bash
+```html
 <!DOCTYPE html>
     <html>
         <head>
@@ -288,7 +315,7 @@ def add_todo():
 
 之後透過一些技巧把所有 HTML 頁面的 base.html
 
-{% extends "base.html" %}
+`{% extends "base.html" %}`
 
 改成 navbar.html
 

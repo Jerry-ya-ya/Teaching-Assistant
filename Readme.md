@@ -1,4 +1,42 @@
-# 頁首
+# 課程地圖
+
+依下列順序閱讀與實作。第 13–15 課為後續延伸；標示「待補充」的教材目前尚無實作內容。
+
+1. [Git 初始化與第一次上傳](/git/git_init.md)
+2. [跨裝置接續開發](/git/git_continue_dev.md)
+3. [Docker 環境與容器化](/containerization/docker.md)
+4. [使用 Render 發佈網站](/launch/render.md)
+5. [Flask 多路由與 Jinja 模板](/flask/muti_routes_and_Jinja.md)
+6. [藍圖化與工廠模式](/flask/blueprint_and_factory.md)（待補充）
+7. [SQLite 與環境變數（含 CRUD 入門）](/flask/SQLite_and_env.md)
+8. [PostgreSQL 與 pgAdmin（更新待辦事項）](/flask/PostgreDB.md)
+9. [API 與 JSON 資料](/flask/api_and_JSON.md)（待補充）
+10. [靜態網路爬蟲](/flask/static_webcrawler.md)
+11. [動態網路爬蟲](/flask/dynamic_webcrawler.md)
+12. [開發、測試與正式環境](/flask/dev_test_and_prod.md)（待補充）
+13. [API 設計與後端服務分層](/system_design/api_design.md)
+14. [Kubernetes 與 Minikube](/containerization/k8s_n_chocolately.md)
+15. [Kubernetes YAML 設定](/containerization/k8s_yaml.md)（待補充）
+
+```mermaid
+flowchart TD
+    A["01 Git 初始化"] --> B["02 跨裝置開發"]
+    B --> C["03 Docker"]
+    C --> D["04 Render 部署"]
+    D --> E["05 多路由與 Jinja"]
+    E --> F["06 Blueprint 與 Factory（待補充）"]
+    F --> G["07 SQLite 與環境變數／CRUD 入門"]
+    G --> H["08 PostgreSQL 與資料更新"]
+    H --> I["09 API 與 JSON（待補充）"]
+    I --> J["10 靜態網路爬蟲"]
+    J --> K["11 動態網路爬蟲"]
+    K --> L["12 開發、測試與正式環境（待補充）"]
+    L --> M["13 API 設計與服務分層"]
+    M --> N["14 Kubernetes 與 Minikube"]
+    N --> O["15 Kubernetes YAML（待補充）"]
+```
+
+## 關於這份教材
 
 這裡會整理出每次助教課的上課內容，如果同學沒有空來上課或者是想要複習、預習都可來這邊找找，基本上只要按照 markdown 檔案中的步驟往下做都不會有太大的問題，看不懂或者是出現自己沒辦法解決的問題可以私訊詢問助教(請不要害羞或是覺得會打擾助教，有看到並且有空一定會回)，助教會最大限度的幫助跟配合大家，如果覺得助教的教學方式哪裡有可以進步的地方一定要跟我說，在教學的同時我也學到很多收穫很多，教學相長，很感謝大家來上我的課，希望我的課能讓大家學到一點東西。
 
@@ -7,80 +45,7 @@
 d3v1at10n
 ```
 
-# 目錄
-
-- [頁首](#頁首)
-- [目錄](#目錄)
-- [前言](#前言)
-
-## Git & Github
-
-- [Git初始化跟第一次上傳](/git/git_init.md)
-- [使用Git在另外一台裝置接續開發](/git/git_continue_dev.md)
-
-## 容器化
-
-- [學習安裝並使用Docker](/containerization/docker.md)
-- [認識Kubernetes並使用Minikube練習](/containerization/k8s_n_chocolately.md)
-- [學習API設計與後端服務分層](/system_design/api_design.md)
-
-## 發佈
-
-- [使用Render將網站發布公網](/launch/render.md)
-
-## 資料庫
-
-- [Postgre資料庫與PostgreDesktop](/flask/PostgreDB.md)
-
-## Flask
-- [多路由與Jinja模板](/flask/muti_routes_and_Jinja.md)
-- [SQLite與環境變數](/flask/SQLite_and_env.md)
-- [靜態網路爬蟲](/flask/static_webcrawler.md)
-- [動態網路爬蟲](/flask/dynamic_webcrawler.md)
-- [Api與JSON資料](/flask/api_and_JSON.md)
-- [藍圖化與工廠模式](/flask/blueprint_and_factory.md)
-- [程式的三種環境](/flask/dev_test_and_prod.md)
-
-# 課程路線圖
-
-```mermaid
-flowchart LR
-
-%% ===== 分類 =====
-classDef git fill:#1f77b4,color:#fff,stroke:#0d3c61,stroke-width:2px;
-classDef docker fill:#2ca02c,color:#fff,stroke:#145a14,stroke-width:2px;
-classDef deploy fill:#ff7f0e,color:#fff,stroke:#7a3b00,stroke-width:2px;
-classDef web fill:#9467bd,color:#fff,stroke:#4b2c6f,stroke-width:2px;
-classDef db fill:#d62728,color:#fff,stroke:#6b0f0f,stroke-width:2px;
-classDef advanced fill:#17becf,color:#fff,stroke:#0b4f57,stroke-width:2px;
-
-%% ===== Git =====
-A[Git 初始化]:::git --> B[跨裝置開發]:::git
-
-%% ===== Docker =====
-B --> C[Docker 環境]:::docker
-
-%% ===== Deploy =====
-C --> D[Render 部署]:::deploy
-
-%% ===== Web =====
-D --> E[多路由 + Jinja]:::web
-E --> F[Blueprint + Factory]:::web
-
-%% ===== DB =====
-F --> G[SQLite + Env]:::db
-G --> H[PostgreSQL]:::db
-H --> I[CRUD]:::db
-
-%% ===== API =====
-I --> J[API + JSON]:::advanced
-
-%% ===== Advanced =====
-J --> K[Web Crawler]:::advanced
-K --> L[Dev Test Prod]:::advanced
-```
-
-# 前言
+## 前言
 
 大家好，我是這學期的助教。
 
@@ -110,3 +75,13 @@ K --> L[Dev Test Prod]:::advanced
 也謝謝杰克給我這個機會，讓我能夠在這門課中持續學習與精進。
 
 希望這學期我們都能做出讓自己驕傲且可以做為面試資本的作品。
+
+## 教材使用方式
+
+本專案整理網站開發課程的教材，涵蓋版本控制、容器化、Flask、資料庫、爬蟲、部署與系統設計。請依各篇教材的步驟操作，並確認每一步的結果再繼續。
+
+- **建立檔案**：以 GitHub `TIP` 提示區塊獨立標出路徑與填寫方式。
+- **程式碼與設定檔**：標示內容類型，並使用對應語言的程式碼區塊。
+- **終端機指令、預期輸出與示意資料**：分別標註，避免將輸出或說明當成指令執行。
+- **NOTE / IMPORTANT**：補充說明與必要操作。
+- **WARNING / CAUTION**：敏感設定、環境限制或可能刪除資料的操作。
