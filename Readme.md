@@ -1,39 +1,44 @@
 # 課程地圖
 
-依下列順序閱讀與實作。第 13–15 課為後續延伸；標示「待補充」的教材目前尚無實作內容。
+依下列順序閱讀與實作。第 14–17 課涵蓋系統設計、環境管理與 Kubernetes；標示「待補充」的教材目前尚無實作內容。
 
-1. [Git 初始化與第一次上傳](/git/git_init.md)
-2. [跨裝置接續開發](/git/git_continue_dev.md)
-3. [Docker 環境與容器化](/containerization/docker.md)
-4. [使用 Render 發佈網站](/launch/render.md)
-5. [Flask 多路由與 Jinja 模板](/flask/muti_routes_and_Jinja.md)
-6. [藍圖化與工廠模式](/flask/blueprint_and_factory.md)（待補充）
-7. [SQLite 與環境變數（含 CRUD 入門）](/flask/SQLite_and_env.md)
-8. [PostgreSQL 與 pgAdmin（更新待辦事項）](/flask/PostgreDB.md)
-9. [API 與 JSON 資料](/flask/api_and_JSON.md)（待補充）
-10. [靜態網路爬蟲](/flask/static_webcrawler.md)
-11. [動態網路爬蟲](/flask/dynamic_webcrawler.md)
-12. [開發、測試與正式環境](/flask/dev_test_and_prod.md)（待補充）
-13. [API 設計與後端服務分層](/system_design/api_design.md)
-14. [Kubernetes 與 Minikube](/containerization/k8s_n_chocolately.md)
-15. [Kubernetes YAML 設定](/containerization/k8s_yaml.md)（待補充）
+1. [Git 初始化與第一次上傳](/version_control/git/git_init.md)
+2. [跨裝置接續開發](/version_control/git/git_continue_dev.md)
+3. [Docker 環境與容器化](/containerization/docker/docker.md)
+4. [Flask 多路由與 Jinja 模板](/backend/flask/muti_routes_and_Jinja.md)
+5. [SQLite 與環境變數（含 CRUD 入門）](/backend/flask/SQLite_and_env.md)
+6. [PostgreSQL 與 pgAdmin（更新待辦事項）](/backend/flask/PostgreDB.md)
+7. [使用 Render 發佈網站](/launch/render.md)
+8. [靜態網路爬蟲](/backend/flask/static_webcrawler.md)
+9. [動態網路爬蟲](/backend/flask/dynamic_webcrawler.md)
+10. [藍圖化與工廠模式](/backend/flask/blueprint_and_factory.md)（待補充）
+11. [前端框架與 npm 套件](/frontend/framework_and_npm.md)（待補充）
+12. [Angular](/frontend/angular/angular.md)（待補充）
+13. [API 與 JSON 資料](/backend/flask/api_and_JSON.md)（待補充）
+14. [API 設計與後端服務分層](/system_design/api_design.md)
+15. [開發、測試與正式環境](/backend/flask/dev_test_and_prod.md)（待補充）
+16. [Kubernetes 與 Minikube](/containerization/k8s/k8s_n_chocolately.md)
+17. [Kubernetes YAML 設定](/containerization/k8s/k8s_yaml.md)（待補充）
 
 ```mermaid
 flowchart TD
-    A["01 Git 初始化"] --> B["02 跨裝置開發"]
-    B --> C["03 Docker"]
-    C --> D["04 Render 部署"]
-    D --> E["05 多路由與 Jinja"]
-    E --> F["06 Blueprint 與 Factory（待補充）"]
-    F --> G["07 SQLite 與環境變數／CRUD 入門"]
-    G --> H["08 PostgreSQL 與資料更新"]
-    H --> I["09 API 與 JSON（待補充）"]
-    I --> J["10 靜態網路爬蟲"]
-    J --> K["11 動態網路爬蟲"]
-    K --> L["12 開發、測試與正式環境（待補充）"]
-    L --> M["13 API 設計與服務分層"]
-    M --> N["14 Kubernetes 與 Minikube"]
-    N --> O["15 Kubernetes YAML（待補充）"]
+    A["01 Git 初始化與第一次上傳"]
+    A --> B["02 跨裝置接續開發"]
+    B --> C["03 Docker 環境與容器化"]
+    C --> D["04 Flask 多路由與 Jinja 模板"]
+    D --> E["05 SQLite 與環境變數（含 CRUD 入門）"]
+    E --> F["06 PostgreSQL 與 pgAdmin（更新待辦事項）"]
+    F --> G["07 使用 Render 發佈網站"]
+    G --> H["08 靜態網路爬蟲"]
+    H --> I["09 動態網路爬蟲"]
+    I --> J["10 藍圖化與工廠模式（待補充）"]
+    J --> K["11 前端框架與 npm 套件（待補充）"]
+    K --> L["12 Angular（待補充）"]
+    L --> M["13 API 與 JSON 資料（待補充）"]
+    M --> N["14 API 設計與後端服務分層"]
+    N --> O["15 開發、測試與正式環境（待補充）"]
+    O --> P["16 Kubernetes 與 Minikube"]
+    P --> Q["17 Kubernetes YAML 設定（待補充）"]
 ```
 
 ## 關於這份教材
@@ -85,3 +90,9 @@ d3v1at10n
 - **終端機指令、預期輸出與示意資料**：分別標註，避免將輸出或說明當成指令執行。
 - **NOTE / IMPORTANT**：補充說明與必要操作。
 - **WARNING / CAUTION**：敏感設定、環境限制或可能刪除資料的操作。
+
+## Angular 課程網站
+
+這份教材也提供 Angular 閱讀網站，支援課程搜尋、Markdown 動態載入、GitHub 提示區塊、Mermaid 圖表與程式碼複製。新增教材時，更新上方課程地圖的編號清單即可，不必另外撰寫 HTML。
+
+在儲存庫根目錄執行 `npm ci` 與 `npm start` 即可本地預覽。GitHub Pages 部署方式與維護說明請參考[網站說明](site/README.md)。

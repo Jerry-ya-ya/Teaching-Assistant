@@ -1,0 +1,11 @@
+<div class="lesson-page">
+  <div class="breadcrumb"><a routerLink="/">課程地圖</a><span>/</span><span>{{ course()?.category ?? '課程教材' }}</span></div>
+  @if (loading()) { <div class="loading-state" role="status"><span class="loading-dot"></span>正在打開教材…</div> }
+  @else if (error()) { <div class="page-error" role="alert"><h1>暫時無法開啟</h1><p>{{ error() }}</p><a routerLink="/">回到課程地圖 →</a></div> }
+  @else if (course(); as item) {
+    <header class="lesson-header"><div class="eyebrow">LESSON {{ item.number.toString().padStart(2, '0') }} <span>/ {{ content.courses().length }}</span></div><h1>{{ item.title }}</h1><div class="lesson-meta"><span class="lesson-status" [class.pending]="item.pending"><i></i>{{ item.pending ? '教材準備中' : '實作教材' }}</span><span>{{ item.category }}</span><a [href]="sourceUrl()" target="_blank" rel="noopener noreferrer">查看 Markdown 原文 ↗</a></div></header>
+    <div class="reading-layout"><article class="lesson-article"><app-markdown [markdown]="markdown()" [source]="item.source" [courses]="content.courses()" (headingsChange)="updateHeadings($event)" />
+      <nav class="lesson-pagination" aria-label="前後課程">@if (previous(); as prev) {<a [routerLink]="['/lesson', prev.id]"><span>← 上一課</span><strong>{{ prev.title }}</strong></a>} @else {<a routerLink="/"><span>← 回到</span><strong>課程地圖</strong></a>} @if (next(); as following) {<a [routerLink]="['/lesson', following.id]" class="next-lesson"><span>下一課 →</span><strong>{{ following.title }}</strong></a>} @else {<a routerLink="/" class="next-lesson"><span>回顧學習路線 ↗</span><strong>回到課程地圖</strong></a>}</nav>
+    </article><aside class="toc" aria-label="本頁目錄"><div class="eyebrow">ON THIS PAGE</div><h2>本頁內容</h2>@for (heading of toc(); track heading.id) {<button type="button" [class.indented]="heading.level === 3" (click)="goTo(heading.id)">{{ heading.title }}</button>}<div class="toc-tip"><span>慢一點，也沒關係。</span>先理解這一步，再繼續下一步。</div></aside></div>
+  }
+</div>

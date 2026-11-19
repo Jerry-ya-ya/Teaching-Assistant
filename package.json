@@ -1,0 +1,35 @@
+{
+  "name": "teaching-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "^22.22.3 || ^24.15.0 || >=26.0.0" },
+  "scripts": {
+    "content": "node scripts/prepare-content.mjs",
+    "start": "npm run content && ng serve --host 127.0.0.1",
+    "build": "npm run content && ng build",
+    "build:pages": "npm run build -- --base-href /Teaching-Assistant/",
+    "check": "node --test tests/content.test.mjs",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@angular/common": "22.2.6",
+    "@angular/compiler": "22.2.6",
+    "@angular/core": "22.2.6",
+    "@angular/platform-browser": "22.2.6",
+    "@angular/router": "22.2.6",
+    "dompurify": "3.4.18",
+    "highlight.js": "11.11.1",
+    "marked": "18.2.1",
+    "mermaid": "12.3.0",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.7",
+    "@angular/cli": "22.2.7",
+    "@angular/compiler-cli": "22.2.6",
+    "@playwright/test": "1.65.1",
+    "typescript": "~6.0.0"
+  }
+}

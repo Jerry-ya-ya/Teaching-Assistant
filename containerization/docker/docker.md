@@ -136,15 +136,15 @@ Docker 也是同樣的概念
 
 https://www.docker.com
 
-![Docker網站](../img/docker/docker_com.png)
+![Docker網站](../../img/docker/docker_com.png)
 
 進入之後點擊 Download Docker Desktop 的按鈕
 
-![下載按鈕](../img/docker/docker_download_button.png)
+![下載按鈕](../../img/docker/docker_download_button.png)
 
 之後選擇符合你現在裝置的版本
 
-![程式版本](../img/docker/docker_version.png)
+![程式版本](../../img/docker/docker_version.png)
 
 在下載的途中我們檢查一下房車的輪子有沒有安裝好
 
@@ -329,15 +329,15 @@ Docker Compose version v5.X.X
 
 請在桌面或者搜尋找到 Docker Desktop 並打開
 
-![Docker準備中](../img/docker/docker_preparing.png)
+![Docker準備中](../../img/docker/docker_preparing.png)
 
 等待應用程式準備好
 
-![Docker應用程式](../img/docker/docker_desktop.png)
+![Docker應用程式](../../img/docker/docker_desktop.png)
 
 看到左下角有 Engine running 就是 Docker 正在正常運作了
 
-![Docker運行中](../img/docker/docker_running.png)
+![Docker運行中](../../img/docker/docker_running.png)
 
 除了開啟應用程式
 

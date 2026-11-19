@@ -89,3 +89,7 @@
 ## 2026/08/02
 
 - Added an API design chapter covering API boundaries, frontend and backend responsibilities, business intent, transaction consistency, and layered backend services, and added its navigation link to the main README.
+
+## 2026/11/18
+
+- Standardize lesson file-creation alerts and code annotations, clarify setup instructions and safety notes, replace exposed database credentials with placeholders, remove off-topic commentary while preserving the README introduction, and move the linked course roadmap to the top with incomplete lessons marked.

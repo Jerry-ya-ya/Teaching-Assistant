@@ -1,0 +1,31 @@
+<a class="skip-link" href="#main-content" (click)="skipToContent($event)">跳至主要內容</a>
+<header class="mobile-header">
+  <a routerLink="/" class="mobile-brand">TA<span> / </span>開發筆記</a>
+  <button type="button" class="menu-toggle" (click)="menuOpen.set(!menuOpen())" [attr.aria-expanded]="menuOpen()" aria-controls="course-sidebar">{{ menuOpen() ? '關閉目錄 ×' : '課程目錄 ☰' }}</button>
+</header>
+@if (menuOpen()) { <button class="sidebar-backdrop" aria-label="關閉課程目錄" (click)="menuOpen.set(false)"></button> }
+<aside id="course-sidebar" class="sidebar" [class.open]="menuOpen()">
+  <a routerLink="/" class="brand"><span class="brand-mark">ta<span>.</span></span><span>Teaching<br>Assistant</span></a>
+  <p class="sidebar-caption">從第一行程式，到你的網站。</p>
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="overview-link"><span>▦</span> 課程總覽 <span class="overview-arrow">↗</span></a>
+  <label class="search"><span aria-hidden="true">⌕</span><input id="course-search" aria-label="搜尋課程" type="search" placeholder="搜尋課程…" [value]="query()" (input)="query.set($any($event.target).value)"><kbd>/</kbd></label>
+  <div class="nav-label"><span>LEARNING PATH</span><span>{{ content.courses().length }} 課</span></div>
+  <nav aria-label="課程目錄" class="course-nav">
+    @for (course of filtered(); track course.id) {
+      <a [routerLink]="['/lesson', course.id]" routerLinkActive="active" ariaCurrentWhenActive="page" class="course-link">
+        <span class="nav-number">{{ course.number.toString().padStart(2, '0') }}</span>
+        <span class="nav-title">{{ course.title }}</span>
+        @if (course.pending) { <span class="pending-dot" title="教材待補充" aria-label="教材待補充"></span> }
+      </a>
+    } @empty { <p class="nav-empty">{{ query() ? '找不到符合的課程' : '課程載入中…' }}</p> }
+  </nav>
+  <a href="https://github.com/Jerry-ya-ya/Teaching-Assistant" target="_blank" rel="noopener noreferrer" class="repo-link">↗ 在 GitHub 查看教材<span>開源學習 · 持續更新</span></a>
+</aside>
+<div class="workspace">
+  <div class="topbar"><span>課堂之外，也能繼續前進。</span><span class="topbar-tag"><i></i> WEB DEVELOPMENT NOTES</span></div>
+  <main id="main-content" tabindex="-1">
+    @if (content.error()) { <div class="page-error" role="alert">{{ content.error() }}</div> }
+    <router-outlet></router-outlet>
+  </main>
+  <footer class="site-footer"><span>Teaching Assistant</span><span>理解每一步，做出自己的作品。</span><a href="https://github.com/Jerry-ya-ya/Teaching-Assistant" target="_blank" rel="noopener noreferrer">GitHub ↗</a></footer>
+</div>

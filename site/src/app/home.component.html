@@ -1,0 +1,33 @@
+<div class="home-page">
+  <section class="hero">
+    <div class="eyebrow"><span class="eyebrow-line"></span> BUILD. UNDERSTAND. GROW.</div>
+    <div class="hero-layout">
+      <div>
+        <h1>把學過的，<br>做成<span>自己的網站。</span></h1>
+        <p class="hero-description">從 Git 的第一次提交，到網站真正上線。<br>循著課程地圖，一步一步理解，也一步一步實作。</p>
+        @if (first(); as course) { <a class="primary-button" [routerLink]="['/lesson', course.id]">從第一課開始 <span>↗</span></a> }
+      </div>
+      <div class="journey-art" aria-hidden="true">
+        <div class="art-top"><span>YOUR NEXT COMMIT</span><span>● ● ●</span></div>
+        <div class="art-code"><span class="muted">01</span> <span class="code-green">learn</span> <span class="code-soft">something_new</span><br><span class="muted">02</span> <span class="code-green">build</span> <span class="code-soft">something_yours</span><br><span class="muted">03</span> <span class="code-green">git push</span> <span class="code-soft">your_ideas</span><span class="cursor"></span></div>
+        <div class="art-bottom"><span>LOCAL</span><span class="art-path">· · · · · · · · · →</span><span class="live-tag">● LIVE</span></div>
+        <div class="art-sticker">讓想法，有個網址。</div>
+      </div>
+    </div>
+    <div class="hero-stats"><span><strong>{{ content.courses().length.toString().padStart(2, '0') }}</strong> 堂主題課程</span><span><strong>{{ available().toString().padStart(2, '0') }}</strong> 堂可立即實作</span><span><strong>01</strong> 個屬於你的作品</span></div>
+  </section>
+  <section class="course-section" aria-labelledby="course-map-title">
+    <div class="section-heading"><div><div class="eyebrow">THE LEARNING PATH</div><h2 id="course-map-title">你的課程地圖<span> / {{ content.courses().length }}</span></h2></div><p>照著順序走，也可以回到需要的地方。</p></div>
+    <div class="category-filters" role="group" aria-label="依主題篩選課程">@for (item of categories(); track item) {<button type="button" [class.selected]="category() === item" [attr.aria-pressed]="category() === item" (click)="category.set(item)">{{ item }}</button>}</div>
+    <div class="course-grid">
+      @for (course of visible(); track course.id) {
+        <a [routerLink]="['/lesson', course.id]" class="course-card" [class.is-pending]="course.pending">
+          <div class="card-top"><span class="card-number">{{ course.number.toString().padStart(2, '0') }}</span><span class="card-category">{{ course.category }}</span><span class="card-arrow">↗</span></div>
+          <h3>{{ course.title }}</h3>
+          <div class="card-bottom"><span class="lesson-status" [class.pending]="course.pending"><i></i>{{ course.pending ? '教材準備中' : '開始閱讀' }}</span><span>LESSON {{ course.number.toString().padStart(2, '0') }}</span></div>
+        </a>
+      }
+    </div>
+  </section>
+  <section class="author-section"><div class="section-heading"><div><div class="eyebrow">A NOTE FROM YOUR TA</div><h2>課程背後的想法</h2></div><span class="author-seal">一起學，<br>一起成長。</span></div>@if (introduction()) {<app-markdown [markdown]="introduction()" source="Readme.md" [courses]="content.courses()" />}</section>
+</div>
